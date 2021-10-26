@@ -1,0 +1,89 @@
+<html>
+<body>
+<center>
+<table width="43%" border="0" align="center" cellpadding="1" cellspacing="0" backgroundcolor="yellow">
+
+ <tr>
+ <th width="322" height="10" scope="col">&nbsp;</th>
+ <td width="150" rowspan="9" scope="col"><img src="images/bull-terriar.png" width="196" height="276"></td>
+ </tr>
+ <tr>
+ <th scope="col"><span class="style20">BOX FEEDER! </span></th>
+ </tr>
+ <tr>
+ <th height="5" scope="col">&nbsp;</th>
+ </tr>
+ <tr>
+ <td bordercolor="#FF00FF"><div align="center"><span class="style1"><img
+src="http://192.168.1.99:8081/embed.php" alt="" width="320" height="240" hspace="0"
+vspace="0" border="1" align="top"></span>
+ </div></td>
+ </tr>
+ <tr>
+ <td align="center" valign="middle" nowrap><div align="center" class="style21">
+&gt;&gt;&gt; กล้อง webcam &lt;&lt;&lt; </div></td>
+ </tr>
+ <tr>
+ <td height="46">
+<form name="form1" method="post" action="">
+ <div align="center">
+ <input name="camon" type="submit" id="camon" value="Play">
+<?php 
+43
+if(isset($_POST['camon']))
+{
+exec('python /home/pi/camon.py');
+}
+?>
+ &nbsp; &nbsp;
+ <input name="camoff" type="submit" id="camoff" value="Stop">
+ <?php
+if(isset($_POST['camoff']))
+{
+exec('python /home/pi/camoff.py');
+}
+?>
+ </div>
+</form>
+</td>
+ </tr>
+ <tr>
+ <td align="center" valign="middle"><span class="style18">**** ตัวเลือกสําหรับสั่งให้
+อาหาร **</span><span class="style22">*</span>* </td>
+ </tr>
+ <tr>
+ <td><form name="form2" method="post" action="">
+ <div align="center">
+ <select name="select">
+ <option value='1'>อาหาร 100g</option>
+ <option value='2'>อาหาร 200g</option>
+ <option value='3'>อาหาร 300g</option>
+ </select>
+&nbsp; &nbsp;
+44
+ <input name="feed" type="submit" id="feed" value="Feed!">
+<?php
+switch($_POST['select']) {
+case '1':
+exec('python 100g-1.py');
+break;
+case '2':
+exec('python 200g-1.py');
+break;
+case '3':
+exec('python 300g-1.py');
+break;
+}
+?>
+</div>
+ </form></td>
+ </tr>
+ <tr>
+ <td><form name="form3" method="post" action="">
+ <input name="imageField" type="image" src="images/tree.png" width="200"
+height="40" border="0">
+ <input name="imageField" type="image" src="images/art_42189620.png"
+width="120" height="100" border="0">
+ </form></td>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RER</title>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("weight").value;
+          var typ = document.getElementById("cattype").value;
+          var ty;
+          switch(typ*10){
+            case (10):
+                ty="แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย";  break;
+            case (12):
+                ty="แมวโตเต็มวัยที่ทำหมัน";  break;
+            case (14):
+                ty="แมวโตเต็มวัยทั่วไป";  break;
+            default:
+                ty="แมวโตเต็มวัยที่ต้องการให้น้ำหนักลด";  break;
+          }
+          document.getElementById("info").innerHTML = "แมวของคุณมีน้ำหนัก " + x + " kg\n ประเภท" + ty;
+          if(x < 2.6){
+                x=53.7*x
+          } else if (x > 6.6){
+                x=131.8 *x
+          } else {
+                x=46.8*x
+          }
+          x=(x*typ)
+          x= parseFloat(x).toFixed(2);
+          document.getElementById("demo").innerHTML = "ค่า RER คือ " + x + " kcal/kg";
+        }
+        </script>
+</head>
+
+<body>
+    <h3>ระบบคำนวนค่า RER สำหรับแมว</h3>
+    <p><strong>Note:</strong> กรุณากรอกน้ำหนักและประเภทแมวให้ถูกต้อง</p>
+
+    <p>น้ำหนัก(kg.):</p><input type="number" id="weight" value="0">
+
+    <form>
+        <label for="cars">ประเภทของแมว :</label>
+            <select id="cattype" name="type">
+                <option value=1.2>แมวโตเต็มวัยที่ทำหมัน</option>
+                <option value=1.4>แมวโตเต็มวัยทั่วไป</option>
+                <option value=1.0>แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย</option>
+                <option value=0.8>แมวโตเต็มวัยที่ต้องการให้น้ำหนักลด</option>
+            </select>
+      </form>
+
+    <p>กดปุ่มเพื่อคำนวนผล</p>
+    <button onclick="myFunction()">Try it</button>
+    <p id="info"></p>
+    <p id="demo"></p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</body>
+</html>
