@@ -36,7 +36,7 @@
     <h3>ระบบคำนวนค่า RER สำหรับแมว</h3>
     <p><strong>Note:</strong> กรุณากรอกน้ำหนักและประเภทแมวให้ถูกต้อง</p>
 
-    <p>น้ำหนัก(kg.):</p><input type="number" id="weight" value="0">
+    <p>น้ำหนัก(kg.):</p><input type="number" id="weight" name="weight" value="0">
 
     <form>
         <label for="cars">ประเภทของแมว :</label>
@@ -46,12 +46,13 @@
                 <option value=1.0>แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย</option>
                 <option value=0.8>แมวโตเต็มวัยที่ต้องการให้น้ำหนักลด</option>
             </select>
-      </form>
+    </form>
 
     <p>กดปุ่มเพื่อคำนวนผล</p>
     <button onclick="myFunction()">Try it</button>
     <p id="info"></p>
     <p id="demo"></p>
+    <button onclick="/collect" method="post">บันทึกข้อมูล</button><br>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </body>
 </html>
