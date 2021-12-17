@@ -1,0 +1,712 @@
+[
+    {
+        "id": "26945d84c9cd3d13",
+        "type": "tab",
+        "label": "WEB_Schedule",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cab0a7efdcb776be",
+        "type": "template",
+        "z": "26945d84c9cd3d13",
+        "name": "HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>schedule</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    \n    <style>\n    .maxWidth{\n        max-width:80%;\n        }\n    .smallWidth{\n        max-width:40%;\n        margin-left: auto; \n        margin-right: 5%;\n        }\n    </style>\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n    \n    \n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"#\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link active\" href=\"#\">Home\n                  <span class=\"visually-hidden\">(current)</span>\n                </a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">schedule</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">Monitor</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">About</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>\n    <div class=\"container-fluid maxWidth\">\n    <div>\n        <center><h2>schedule</h2></center>\n\n    <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Status</th>\n            <th scope=\"col\">Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          {{#payload}}\n        <tr class=\"table-active\">\n          \n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n            <td scope=\"row\"><span class=\"badge bg-success\">Success</span></td>\n            <td scope=\"row\"><a href=\"/schedule/delete/{{rowid}}\"><button class=\"btn btn-warning\">Delete</button></a></td>\n          </tr>\n        </tr>\n          {{/payload}}\n        </tbody>\n      </table>\n    </div>\n    <br><br>\n    <div class=\"smallWidth\">\n    <h3>Add more schedule</h3>\n    <form method=\"POST\" action=\"/schedule\"> <!--action to post of /schedule-->\n      <fieldset>\n        <div class=\"form-group\">\n            <label for=\"time\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Time to feed</label>\n            <input type=\"time\" class=\"form-control\" id=\"time\" name=\"time\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 07:00 AM, 09:25 PM, 02:45 PM</small>\n         </div>\n        <div class=\"form-group\">\n            <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Amount of food</label>\n            <!--input type=\"int\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Enter amount of food\"-->\n            <input class=\"form-control\" id=\"amount\" name=\"amount\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 100, 175, 250 (gram)</small>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n          <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n        </div>\n        <div class=\"form-group\">\n        <center>\n          <!--submit button-->\n          <button type=\"submit\" class=\"btn btn-success\">Add</button>\n        </center>\n        </div>\n      </fieldset>\n    </form>\n    </div>\n    </div>\n    \n</body>\n</html>\n",
+        "output": "str",
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "b96637ba2f6486b7"
+            ]
+        ]
+    },
+    {
+        "id": "9baf141d94aff9a9",
+        "type": "http in",
+        "z": "26945d84c9cd3d13",
+        "name": "GET:schedule",
+        "url": "/schedule",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "2e437bbbaac2441d"
+            ]
+        ]
+    },
+    {
+        "id": "b96637ba2f6486b7",
+        "type": "http response",
+        "z": "26945d84c9cd3d13",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 760,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c3e32398ecc3605d",
+        "type": "http in",
+        "z": "26945d84c9cd3d13",
+        "name": "POST:schedule",
+        "url": "/schedule",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 380,
+        "wires": [
+            [
+                "bcbfaee9ef830ef5",
+                "8d5fd373bc078603"
+            ]
+        ]
+    },
+    {
+        "id": "596e7dd140203d56",
+        "type": "template",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO schedule VALUES ('{{payload.get.time}}', '{{payload.get.amount}}', '{{payload.get.des}}');",
+        "output": "str",
+        "x": 800,
+        "y": 500,
+        "wires": [
+            [
+                "d20e8ecf85c4d646"
+            ]
+        ]
+    },
+    {
+        "id": "d20e8ecf85c4d646",
+        "type": "sqlite",
+        "z": "26945d84c9cd3d13",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 1030,
+        "y": 380,
+        "wires": [
+            [
+                "2e437bbbaac2441d"
+            ]
+        ]
+    },
+    {
+        "id": "61debede2891fbf2",
+        "type": "http in",
+        "z": "26945d84c9cd3d13",
+        "name": "Delete:schedule",
+        "url": "/schedule/delete/:rowid",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 860,
+        "wires": [
+            [
+                "295c99da8891f455"
+            ]
+        ]
+    },
+    {
+        "id": "295c99da8891f455",
+        "type": "template",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "DELETE FROM schedule WHERE rowid = {{req.params.rowid}}",
+        "output": "str",
+        "x": 620,
+        "y": 860,
+        "wires": [
+            [
+                "d20e8ecf85c4d646"
+            ]
+        ]
+    },
+    {
+        "id": "1465aa6d2b4b5a1d",
+        "type": "comment",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "info": "- แก้ schedule -> schedule\n- แก้ amounth -> amount",
+        "x": 100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "96760b1d0d3f037f",
+        "type": "switch",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "property": "payload.get.time",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "check",
+                "vt": "msg",
+                "case": true
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 600,
+        "wires": [
+            [
+                "b345dfacf3778c3a",
+                "ad55df0f16e83828"
+            ],
+            [
+                "596e7dd140203d56"
+            ]
+        ]
+    },
+    {
+        "id": "2e437bbbaac2441d",
+        "type": "sqlite",
+        "z": "26945d84c9cd3d13",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, * FROM schedule ORDER BY time ASC;",
+        "name": "DB",
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "cab0a7efdcb776be"
+            ]
+        ]
+    },
+    {
+        "id": "17639f9bf022073b",
+        "type": "inject",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "e6dd59d60afc1fce"
+            ]
+        ]
+    },
+    {
+        "id": "77db04617450ab10",
+        "type": "debug",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3817cbccddacd1d8",
+        "type": "comment",
+        "z": "26945d84c9cd3d13",
+        "name": "select",
+        "info": "ตอนนี้คือเลือก time ออกมาเป็น string ใน payload.check\nสามารถเอาไป match ใน switch ได้\n\n*** ถ้าอยากได้ตัวแปรอื่นใช้\nSELECT DISTINCT *value* FROM schedule;\n",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "73ec33489c8419f3",
+        "type": "comment",
+        "z": "26945d84c9cd3d13",
+        "name": "case 2",
+        "info": "case no schedule in this time before",
+        "x": 730,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "47555ebc1fdc38b2",
+        "type": "comment",
+        "z": "26945d84c9cd3d13",
+        "name": "case 1",
+        "info": "case we have schedule in this time before",
+        "x": 730,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "975950cb0e362723",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "select time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "check",
+                "pt": "msg",
+                "to": "$join(payload.time,\"|\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$join(payload.time,\"|\")",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 380,
+        "wires": [
+            [
+                "acd481852182df25"
+            ]
+        ]
+    },
+    {
+        "id": "bcbfaee9ef830ef5",
+        "type": "sqlite",
+        "z": "26945d84c9cd3d13",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT DISTINCT time FROM schedule;",
+        "name": "SELECT",
+        "x": 340,
+        "y": 380,
+        "wires": [
+            [
+                "975950cb0e362723"
+            ]
+        ]
+    },
+    {
+        "id": "7f650a158f489818",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "select time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$join(payload.time,\"|\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 80,
+        "wires": [
+            [
+                "2c33d01ff6c55c66"
+            ]
+        ]
+    },
+    {
+        "id": "2c33d01ff6c55c66",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "check",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 80,
+        "wires": [
+            [
+                "77db04617450ab10"
+            ]
+        ]
+    },
+    {
+        "id": "e6dd59d60afc1fce",
+        "type": "sqlite",
+        "z": "26945d84c9cd3d13",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT DISTINCT time FROM schedule;",
+        "name": "SELECT",
+        "x": 340,
+        "y": 80,
+        "wires": [
+            [
+                "7f650a158f489818"
+            ]
+        ]
+    },
+    {
+        "id": "acd481852182df25",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "check",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "data",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 380,
+        "wires": [
+            [
+                "351884482491f8f3"
+            ]
+        ]
+    },
+    {
+        "id": "0b26a5bacf81788d",
+        "type": "inject",
+        "z": "26945d84c9cd3d13",
+        "name": "morning feed",
+        "props": [
+            {
+                "p": "payload.time",
+                "v": "15:45",
+                "vt": "str"
+            },
+            {
+                "p": "payload.amount",
+                "v": "80",
+                "vt": "str"
+            },
+            {
+                "p": "payload.des",
+                "v": "morning feeding",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "bcbfaee9ef830ef5",
+                "8d5fd373bc078603"
+            ]
+        ]
+    },
+    {
+        "id": "5ec06f18599b1c7d",
+        "type": "template",
+        "z": "26945d84c9cd3d13",
+        "name": "UPDATE",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "UPDATE schedule set time = '{{payload.data.time}}', amount = '{{payload.data.amount}}', des = '{{payload.data.des}}' WHERE time = '{{payload.check.time}}'",
+        "output": "str",
+        "x": 1240,
+        "y": 480,
+        "wires": [
+            [
+                "d20e8ecf85c4d646"
+            ]
+        ]
+    },
+    {
+        "id": "da7b42d08692f6e5",
+        "type": "join",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 580,
+        "wires": [
+            [
+                "3a1f33b9918b8163"
+            ]
+        ]
+    },
+    {
+        "id": "b345dfacf3778c3a",
+        "type": "sqlite",
+        "z": "26945d84c9cd3d13",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, time FROM schedule;",
+        "name": "SELECT",
+        "x": 820,
+        "y": 700,
+        "wires": [
+            [
+                "e2c474ee9efe835f"
+            ]
+        ]
+    },
+    {
+        "id": "e2c474ee9efe835f",
+        "type": "function",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, row: (i+1) }));\n    node.send(msg.payload[i]);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 700,
+        "wires": [
+            [
+                "32ab6217c2834bfc"
+            ]
+        ]
+    },
+    {
+        "id": "32ab6217c2834bfc",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "to check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "check",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 700,
+        "wires": [
+            [
+                "da7b42d08692f6e5"
+            ]
+        ]
+    },
+    {
+        "id": "ad55df0f16e83828",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "to get",
+        "rules": [
+            {
+                "t": "set",
+                "p": "amount",
+                "pt": "msg",
+                "to": "payload.get.amount",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "des",
+                "pt": "msg",
+                "to": "payload.get.des",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "time",
+                "pt": "msg",
+                "to": "payload.get.time",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "check",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 580,
+        "wires": [
+            [
+                "da7b42d08692f6e5"
+            ]
+        ]
+    },
+    {
+        "id": "351884482491f8f3",
+        "type": "join",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "96760b1d0d3f037f"
+            ]
+        ]
+    },
+    {
+        "id": "8d5fd373bc078603",
+        "type": "change",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "get",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 460,
+        "wires": [
+            [
+                "351884482491f8f3"
+            ]
+        ]
+    },
+    {
+        "id": "3a1f33b9918b8163",
+        "type": "switch",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "property": "payload.data.time",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "payload.check.time",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1220,
+        "y": 580,
+        "wires": [
+            [
+                "5ec06f18599b1c7d"
+            ]
+        ]
+    },
+    {
+        "id": "c9fd59362167d331",
+        "type": "sqlitedb",
+        "db": "/home/CatFeeder/database/demo.db",
+        "mode": "RWC"
+    }
+]
