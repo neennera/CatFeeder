@@ -48,17 +48,18 @@
         </div>
       </nav>
       <br><br>
+
+
     <div class="container-fluid maxWidth">
-    <div>
-        <center><h2>Cat Information</h2></center>
+            <center><h2>Cat Information</h2></center>
     </div>
 
-    
+    <!--first row-->
+    <div class="container-fluid maxWidth">
     <!--Cat information-->
-    <br><br>
-    <div class="smallWidthRight">
+    <div class="smallWidth" style="background-color:blue; max-width:100%; align-self: center;">
       {{#payload}}
-      <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+      <div class="container">
         <div class="card p-4">
             <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="rbtn btn-secondary">
                 <img src="http://pngimg.com/uploads/cat/cat_PNG50514.png" height="100" width="100" /></button>
@@ -73,41 +74,55 @@
               </div>
             </div>
         </div>
-    </div class="smallWidthLeft">
       {{/payload}}
-    
-    <div>
-      <h3>Add more schedule</h3>
-    <form method="POST" action="/schedule"> <!--action to post of /schedule-->
-      <fieldset>
-        <div class="form-group">
-            <label for="time" class="form-label mt-4" style="font-weight: bold;">Time to feed</label>
-            <input type="time" class="form-control" id="time" name="time">
-            <small id="emailHelp" class="form-text text-muted">Example : 07:00 AM, 09:25 PM, 02:45 PM</small>
-         </div>
-        <div class="form-group">
-            <label for="mount" class="form-label mt-4" style="font-weight: bold;">Amount of food</label>
-            <!--input type="int" class="form-control" id="exampleInputPassword1" placeholder="Enter amount of food"-->
-            <input class="form-control" id="amount" name="amount">
-            <small id="emailHelp" class="form-text text-muted">Example : 100, 175, 250 (gram)</small>
-        </div>
-        <div class="form-group">
-          <label for="des" class="form-label mt-4" style="font-weight: bold;">Description</label>
-          <input type="text" class="form-control" id="des" name="des">
-        </div>
-        <div class="form-group">
-        <center>
-          <!--submit button-->
-          <button type="submit" class="btn btn-success">Add</button>
-        </center>
-        </div>
-      </fieldset>
-    </form>
     </div>
     </div>
     <!--End of Cat information-->
-
+      
+    <!--Cat schedule--> 
+    <div class="smallWidth" style="background-color: aqua; max-width:100%; align-self: center;">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Amount of food</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--display value of payload-->
+          {{#payload}}
+        <tr class="table-active">
+          
+          <tr class="table-light">
+            <td scope="row">{{time}}</td>
+            <td scope="row">{{amount}}</td>
+            <td scope="row">{{des}}</td>
+          </tr>
+        </tr>
+          {{/payload}}
+        </tbody>
+      </table>
     </div>
+    <!--End of Cat schdule-->
+    </div>
+    <!--End of first row-->
     
+
+    
+
+    
+    65
+    <div class="row">
+      <div class="column" style="background-color:#aaa;">
+        <h2>Column 1</h2>
+        <p>Some text..</p>
+      </div>
+      <div class="column" style="background-color:#bbb;">
+        <h2>Column 2</h2>
+        <p>Some text..</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
