@@ -1,0 +1,180 @@
+[
+    {
+        "id": "5b0dd51dc5548102",
+        "type": "tab",
+        "label": "WEB_Other",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e658ad231bd26a2e",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "catinfo HTML",
+        "field": "catinfo",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "    <!--Cat information-->    \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"> <button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" /></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br><br>\n                <span class=\"idd\">Weight : {{weight}} kg</span>\n                <span class=\"idd\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br><br>\n                <div class=\" d-flex mt-2\"> <button class=\"btn1 btn-dark\">Edit Profile</button> </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <div class=\" px-2 rounded mt-4 date \"> <span class=\"join\">Last update {{date}}</span> </div> \n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    </div>\n    <!--End of Cat information-->\n",
+        "output": "str",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "20a3a85892ea5781"
+            ]
+        ]
+    },
+    {
+        "id": "dfb745b3fe6bcd5a",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "GET:catinfo",
+        "url": "/catinfo",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "fed5d186c329f834"
+            ]
+        ]
+    },
+    {
+        "id": "2f7d97c1df1f0f09",
+        "type": "http response",
+        "z": "5b0dd51dc5548102",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1140,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7d7888c8d2395ad1",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "Cat info",
+        "info": "",
+        "x": 100,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fed5d186c329f834",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name,type,weight,des,date FROM catinfo;",
+        "name": "info DB",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "e658ad231bd26a2e"
+            ]
+        ]
+    },
+    {
+        "id": "20a3a85892ea5781",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, * FROM schedule ORDER BY time ASC;",
+        "name": "DB",
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "447937a43163f964"
+            ]
+        ]
+    },
+    {
+        "id": "447937a43163f964",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "cat schedule HTML",
+        "field": "schedule",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!--Cat schedule--> \n    <div class=\"column\">\n      <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          \n        <tr class=\"table-active\">\n          {{#payload}}\n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n          </tr>\n          {{/payload}}\n        </tr>\n        \n        </tbody>\n      </table>\n    </div>\n    <!--End of Cat schdule-->\n",
+        "output": "str",
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "c5821766a62fa2db"
+            ]
+        ]
+    },
+    {
+        "id": "c5821766a62fa2db",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "style",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column {\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}",
+        "output": "str",
+        "x": 790,
+        "y": 220,
+        "wires": [
+            [
+                "0bd24e0e8214a0cb",
+                "4cd045be13e3b658"
+            ]
+        ]
+    },
+    {
+        "id": "0bd24e0e8214a0cb",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>schedule</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"style.css\">\n    <style>\n    {{{style}}}\n    </style>\n    <!--cat info paylode : name weight type des update-->\n    <!--cat schedule paylode : time amount des-->\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n    \n    \n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"#\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link active\" href=\"#\">Home\n                  <span class=\"visually-hidden\">(current)</span>\n                </a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">schedule</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">Monitor</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">About</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>\n\n\n    <div class=\"container-fluid maxWidth\">\n    <center><h2>Cat Information</h2></center>\n    <br>\n\n    <!--first row-->\n    <div class=\"row\">\n    <!--Cat information-->    \n    {{{catinfo}}}\n    <!--End of Cat information-->\n      \n    <!--Cat schedule--> \n    {{{schedule}}}\n    <!--End of Cat schedule-->\n    <!--End of first row-->\n  </div>\n</body>\n</html>\n",
+        "output": "str",
+        "x": 940,
+        "y": 220,
+        "wires": [
+            [
+                "2f7d97c1df1f0f09"
+            ]
+        ]
+    },
+    {
+        "id": "4cd045be13e3b658",
+        "type": "debug",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c9fd59362167d331",
+        "type": "sqlitedb",
+        "db": "/home/CatFeeder/database/demo.db",
+        "mode": "RWC"
+    }
+]
