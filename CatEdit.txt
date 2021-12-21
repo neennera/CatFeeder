@@ -1,0 +1,242 @@
+[
+    {
+        "id": "6755ab8404ba943f",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "GET:catedit",
+        "url": "/catedit",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "9c785b52ae7df428"
+            ]
+        ]
+    },
+    {
+        "id": "a7dd2df1eaae5056",
+        "type": "http response",
+        "z": "5b0dd51dc5548102",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1020,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d720c3315fc5141d",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "html",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Edit Information</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <style>\n    {{{style}}}\n    </style>\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n    \n    \n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"#\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link active\" href=\"#\">Home\n                  <span class=\"visually-hidden\">(current)</span>\n                </a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">schedule</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">Monitor</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"#\">About</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>\n    \n      <div class=\"container-fluid maxWidth\">\n        <!--first row-->\n        <div class=\"row\">\n            <center><h2>Edit Cat information</h2></center>\n        <!--Cat information-->    \n        {{{catinfo}}}\n        <!--End of Cat information-->\n        <!--Edit form-->\n        {{{form}}}\n          <!--End of edit form-->\n        </div>\n    </div>\n    \n</body>\n</html>\n",
+        "output": "str",
+        "x": 870,
+        "y": 400,
+        "wires": [
+            [
+                "a7dd2df1eaae5056"
+            ]
+        ]
+    },
+    {
+        "id": "9ea49b4adb2b3ad1",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "style",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column {\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}",
+        "output": "str",
+        "x": 750,
+        "y": 400,
+        "wires": [
+            [
+                "d720c3315fc5141d"
+            ]
+        ]
+    },
+    {
+        "id": "667b30f09c7746ec",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "POST:catedit",
+        "url": "/catinfo",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "cd9fe468fd8fc6b8"
+            ]
+        ]
+    },
+    {
+        "id": "9c785b52ae7df428",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name,type,weight,des,date FROM catinfo;",
+        "name": "info DB",
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "342abcf6f96ddb99"
+            ]
+        ]
+    },
+    {
+        "id": "342abcf6f96ddb99",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "catinfo HTML",
+        "field": "catinfo",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "    <!--Cat information-->    \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"> <button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" /></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br><br>\n                <span class=\"idd\">Weight : {{weight}} kg</span>\n                <span class=\"idd\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br><br>\n                <div class=\" d-flex mt-2\"> <a href=\"/catedit\"><button class=\"btn1 btn-dark\">Edit Profile</button></a> </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <div class=\" px-2 rounded mt-4 date \"> <span class=\"join\">Last update {{date}}</span> </div> \n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    </div>\n    <!--End of Cat information-->\n",
+        "output": "str",
+        "x": 430,
+        "y": 400,
+        "wires": [
+            [
+                "0da9b5f94d0e68f5"
+            ]
+        ]
+    },
+    {
+        "id": "0da9b5f94d0e68f5",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "form HTML",
+        "field": "form",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<div class=\"column\">\n        <form method=\"POST\" action=\"/catinfo\"> <!--action to post of /catedit-->\n            <fieldset>\n                <div class=\"form-group\">\n                    <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Name</label>\n                    <input class=\"form-control\" id=\"name\" name=\"name\">\n                </div>\n              <div class=\"form-group\">\n                  <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Weight</label>                  \n                  <input class=\"form-control\" id=\"weight\" name=\"weight\">\n                  <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 2.72, 3.21, 4.00 (kilogram)</small>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Cat type</label>\n                <br>\n                <select id=\"type\" name=\"type\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Intact Adult (แมวโตเต็มวัยที่ทำหมัน)</option>\n                    <option value=2>Neutered Adult(แมวโตเต็มวัยทั่วไป)</option>\n                    <option value=3>Obese prone (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)</option>\n                    <option value=4>Weight loss(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)</option>\n                    <option value=5>Kitten (ลูกแมว)</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n                <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n              </div>\n              <div class=\"form-group\">\n              <center>\n                <!--submit button-->\n                <button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\">Save</button>\n              </center>\n              </div>\n              \n            </fieldset>\n          </form>\n        </div>",
+        "output": "str",
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "9ea49b4adb2b3ad1"
+            ]
+        ]
+    },
+    {
+        "id": "c3cd974b721e3de9",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 950,
+        "y": 500,
+        "wires": [
+            [
+                "fed5d186c329f834"
+            ]
+        ]
+    },
+    {
+        "id": "fbdc9b198d968dc8",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name FROM catinfo;",
+        "name": "info DB",
+        "x": 460,
+        "y": 500,
+        "wires": [
+            [
+                "3631cd92b1d4e3ac"
+            ]
+        ]
+    },
+    {
+        "id": "cd9fe468fd8fc6b8",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "UPDATE",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "UPDATE catinfo set name = '{{payload.name}}', weight = '{{payload.weight}}', des = '{{payload.des}}', type = '{{payload.type}}'",
+        "output": "str",
+        "x": 280,
+        "y": 500,
+        "wires": [
+            [
+                "fbdc9b198d968dc8"
+            ]
+        ]
+    },
+    {
+        "id": "d0ac203736958876",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{{topic}}} WHERE name = '{{name}}'",
+        "output": "str",
+        "x": 780,
+        "y": 500,
+        "wires": [
+            [
+                "c3cd974b721e3de9"
+            ]
+        ]
+    },
+    {
+        "id": "3631cd92b1d4e3ac",
+        "type": "change",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[0].name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 500,
+        "wires": [
+            [
+                "d0ac203736958876"
+            ]
+        ]
+    },
+    {
+        "id": "c9fd59362167d331",
+        "type": "sqlitedb",
+        "db": "/home/CatFeeder/database/demo.db",
+        "mode": "RWC"
+    }
+]
