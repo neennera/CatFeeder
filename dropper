@@ -1,0 +1,5 @@
+
+https://getbootstrap.com/docs/5.1/components/alerts/
+alert tag
+<div id="liveAlertPlaceholder"></div>
+<button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button>
