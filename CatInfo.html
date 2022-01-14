@@ -28,29 +28,31 @@
 
     <!--first row-->
     <div class="row">
-    <!--Cat information-->    
+    {{{catinfo}}}
+    <!--Cat information> 
     <div class="column">
       {{#payload}}
-      <div class="container">
+      <div class="container" style="font-size:16px;">
         <div class="card p-4">
-            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="rbtn btn-secondary">
-                <img src="http://pngimg.com/uploads/cat/cat_PNG50514.png" height="100" width="100" /></button>
+            <div class=" image d-flex flex-column justify-content-center align-items-center"><button class="rbtn btn-secondary">
+                <img src="http://pngimg.com/uploads/cat/cat_PNG50514.png" height="100" width="100" ></button>
 
-                <span class="name mt-3">{{name}}</span> <br><br>
-                <span class="idd">Weight : {{weight}} kg</span>
-                <span class="idd">type : {{type}} </span>
+                <span class="name mt-3">{{name}}</span> <br>
+                <span class="idd" style="font-size:16px;">Weight : {{weight}} kg</span>
+                <span class="idd" style="font-size:16px;">type : {{type}} </span>
                 <div class="text mt-3"> <span>{{des}} </span> </div>
-                <br><br>
-                <div class=" d-flex mt-2"> <a href="/catedit"><button class="btn1 btn-dark">Edit Profile</button></a> </div>
+                <br>
+                <div class=" btn btn-lg" style="width:100%"> <a href="/catedit"><button class="btn btn-info" style="width:100%">Edit Profile</button></a> </div>
+                </div>
                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">                
-                <div class=" px-2 rounded mt-4 date "> <span class="join">Last update {{date}}</span> </div> 
+                <center><div class=" card border-secondary mb-3 "> <span class="join text-primary">Last update {{date}}</span> </div> </center>
               </div>
             </div>
         </div>
         {{/payload}}
     </div>
-    </div>
-    <!--End of Cat information-->
+    
+    <End of Cat information-->
       
     <!--Cat schedule--> 
     <div class="column">

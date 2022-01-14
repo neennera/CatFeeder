@@ -1,0 +1,694 @@
+[
+    {
+        "id": "e658ad231bd26a2e",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "catinfo HTML",
+        "field": "catinfo",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!--Cat information--> \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\" style=\"font-size:16px;\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br>\n                <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br>\n                <div class=\" btn btn-lg\" style=\"width:100%\"> <a href=\"/catedit\"><button class=\"btn btn-info\" style=\"width:100%\">Edit Profile</button></a> </div>\n                </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <center><div class=\" card border-secondary mb-3 \"> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    <!--End of Cat information-->",
+        "output": "str",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "20a3a85892ea5781"
+            ]
+        ]
+    },
+    {
+        "id": "dfb745b3fe6bcd5a",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "GET:catinfo",
+        "url": "/catinfo",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "fed5d186c329f834"
+            ]
+        ]
+    },
+    {
+        "id": "2f7d97c1df1f0f09",
+        "type": "http response",
+        "z": "5b0dd51dc5548102",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7d7888c8d2395ad1",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "Cat info",
+        "info": "",
+        "x": 100,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fed5d186c329f834",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name,type,weight,des,date FROM catinfo;",
+        "name": "info DB",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "e658ad231bd26a2e"
+            ]
+        ]
+    },
+    {
+        "id": "20a3a85892ea5781",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, * FROM schedule ORDER BY time ASC;",
+        "name": "DB",
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "447937a43163f964"
+            ]
+        ]
+    },
+    {
+        "id": "447937a43163f964",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "cat schedule HTML",
+        "field": "schedule",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!--Cat schedule--> \n    <div class=\"column\">\n      <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          \n        <tr class=\"table-active\">\n          {{#payload}}\n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n          </tr>\n          {{/payload}}\n        </tr>\n        \n        </tbody>\n      </table>\n    </div>\n    <!--End of Cat schdule-->\n",
+        "output": "str",
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "c5821766a62fa2db"
+            ]
+        ]
+    },
+    {
+        "id": "c5821766a62fa2db",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "style",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}",
+        "output": "str",
+        "x": 790,
+        "y": 220,
+        "wires": [
+            [
+                "707559ee99e96d7b"
+            ]
+        ]
+    },
+    {
+        "id": "0bd24e0e8214a0cb",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "html template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Cat Information</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"style.css\">\n    <style>\n    {{{style}}}\n    </style>\n    <!--cat info paylode : name weight type des update-->\n    <!--cat schedule paylode : time amount des-->\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n\n    {{{nav}}}\n    \n\n\n    <div class=\"container-fluid maxWidth\">\n    <center><h2>Cat Information</h2></center>\n    <br>\n\n    <!--first row-->\n    <div class=\"row\">\n    {{{catinfo}}}\n      \n    <!--Cat schedule--> \n    <div class=\"column\">\n      <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          \n        <tr class=\"table-active\">\n          {{#payload}}\n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n          </tr>\n          {{/payload}}\n        </tr>\n        \n        </tbody>\n      </table>\n    </div>\n    <!--End of Cat schedule-->\n    <!--End of first row-->\n  </div></div>\n  {{{footer}}}\n</body>\n</html>\n",
+        "output": "str",
+        "x": 1180,
+        "y": 220,
+        "wires": [
+            [
+                "2f7d97c1df1f0f09"
+            ]
+        ]
+    },
+    {
+        "id": "6755ab8404ba943f",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "GET:catedit",
+        "url": "/catedit",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "9c785b52ae7df428"
+            ]
+        ]
+    },
+    {
+        "id": "a7dd2df1eaae5056",
+        "type": "http response",
+        "z": "5b0dd51dc5548102",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1300,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d720c3315fc5141d",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "html",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Edit information</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"style.css\">\n    <style>\n      {{{style}}}\n      </style>\n</head>\n\n<body>\n  \n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n\n    {{{nav}}}\n    \n      <div class=\"container-fluid maxWidth\">\n        <!--first row-->\n        <center><h2>Edit Cat information</h2></center>\n      <div class=\"row\">\n        \n        <!--Cat information--> \n      <div class=\"column\">\n        {{#payload}}\n        <div class=\"container\" style=\"font-size:16px;\">\n          <div class=\"card p-4\">\n              <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                  <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                  <span class=\"name mt-3\">{{name}}</span> <br>\n                  <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                  <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                  <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                  <br>\n                  \n                  </div>\n                  <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                  <center><div class=\" card border-secondary mb-3 \"> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n                </div>\n              </div>\n          </div>\n          {{/payload}}\n      </div>\n    \n      <!--End of Cat information-->\n\n            \n        <!--Edit form-->\n        <div class=\"column\">\n        <form method=\"POST\" action=\"/catinfo\"> <!--action to post of /catedit-->\n            <fieldset>\n                <div class=\"form-group\">\n                    <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Name</label>\n                    <input class=\"form-control\" id=\"name\" name=\"name\">\n                </div>\n              <div class=\"form-group\">\n                  <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Weight</label>                  \n                  <input class=\"form-control\" id=\"weight\" name=\"weight\">\n                  <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 2.72, 3.21, 4.00 (kilogram)</small>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Cat type</label>\n                <br>\n                <select id=\"type\" name=\"type\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Intact Adult (แมวโตเต็มวัยที่ทำหมัน)</option>\n                    <option value=2>Neutered Adult(แมวโตเต็มวัยทั่วไป)</option>\n                    <option value=3>Obese prone (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)</option>\n                    <option value=4>Weight loss(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)</option>\n                    <option value=5>Kitten (ลูกแมว)</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">schedule update</label>\n                <br>\n                <select id=\"sche\" name=\"sche\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Keep Old Schedule</option>\n                    <option value=2>Update Schedule</option>\n                    <option value=3>Get New schedule</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n                <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n              </div>\n              <div class=\"form-group\">\n              <center>\n                <!--submit button-->\n                <button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\">Save</button>\n              </center>\n              </div>\n              \n            </fieldset>\n          </form>\n        </div>\n          <!--End of edit form-->\n        \n\n        </div>\n        <!--End of first row-->\n\n        <!--second row-->\n        <div class=\"row\">\n          <br><br><hr><br><br><h2>Information</h2><br><br>\n        <!--information-->\n        \n        <div class=\"accordion\" id=\"accordionExample\" style=\"font-size:17px;\">\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne\">\n              <button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n                What is cat type? ประเภทของแมวคืออะไร?\n              </button>\n            </h2>\n            <div id=\"collapseOne\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                  เดี๋ยวต้องเอาข้อมูลจากรายงานมาใส่<br>\n                  <strong>Intact Adult</strong> (แมวโตเต็มวัยที่ทำหมัน)<br>\n                  <strong>Neutered Adult</strong>(แมวโตเต็มวัยทั่วไป)<br>\n                  <strong>Obese prone</strong> (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)<br>\n                  <strong>Weight loss</strong>(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)\n              </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingTwo\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseTwo\" aria-expanded=\"false\" aria-controls=\"collapseTwo\">\n                Schedule Update? การจัดการตารางมีอะไรบ้าง?\n              </button>\n            </h2>\n            <div id=\"collapseTwo\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                <strong>Old Schedule</strong>  คือ บลาบลาบลา<br>\n                <strong>Update Schedule</strong>  คือ บลาบลาบลา<br>\n                <strong>Get New schedule</strong>  คือ บลาบลาบลา<br>\n              </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingThree\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseThree\" aria-expanded=\"false\" aria-controls=\"collapseThree\">\n                Accordion Item #3\n              </button>\n            </h2>\n            <div id=\"collapseThree\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingThree\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.\n              </div>\n            </div>\n          </div>\n        </div>\n        <!--End of information-->\n        </div>\n        <!--End of second row-->\n    </div>\n  \n    </div>\n\n    {{{footer}}}\n</body>\n</html>\n",
+        "output": "str",
+        "x": 1130,
+        "y": 400,
+        "wires": [
+            [
+                "a7dd2df1eaae5056"
+            ]
+        ]
+    },
+    {
+        "id": "9ea49b4adb2b3ad1",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "style",
+        "field": "style",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}",
+        "output": "str",
+        "x": 750,
+        "y": 400,
+        "wires": [
+            [
+                "0e162fc900a659cc"
+            ]
+        ]
+    },
+    {
+        "id": "667b30f09c7746ec",
+        "type": "http in",
+        "z": "5b0dd51dc5548102",
+        "name": "POST:catedit",
+        "url": "/catinfo",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "cd9fe468fd8fc6b8"
+            ]
+        ]
+    },
+    {
+        "id": "9c785b52ae7df428",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name,type,weight,des,date FROM catinfo;",
+        "name": "info DB",
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "342abcf6f96ddb99"
+            ]
+        ]
+    },
+    {
+        "id": "342abcf6f96ddb99",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "catinfo HTML",
+        "field": "catinfo",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "    <!--Cat information-->    \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"> <button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" /></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br><br>\n                <span class=\"idd\">Weight : {{weight}} kg</span>\n                <span class=\"idd\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br><br>\n                <div class=\" d-flex mt-2\"> <a href=\"/catedit\"><button class=\"btn1 btn-dark\">Edit Profile</button></a> </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <div class=\" px-2 rounded mt-4 date \"> <span class=\"join\">Last update {{date}}</span> </div> \n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    </div>\n    <!--End of Cat information-->\n",
+        "output": "str",
+        "x": 430,
+        "y": 400,
+        "wires": [
+            [
+                "0da9b5f94d0e68f5"
+            ]
+        ]
+    },
+    {
+        "id": "0da9b5f94d0e68f5",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "form HTML",
+        "field": "form",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<div class=\"column\">\n        <form method=\"POST\" action=\"/catinfo\"> <!--action to post of /catedit-->\n            <fieldset>\n                <div class=\"form-group\">\n                    <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Name</label>\n                    <input class=\"form-control\" id=\"name\" name=\"name\">\n                </div>\n              <div class=\"form-group\">\n                  <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Weight</label>                  \n                  <input class=\"form-control\" id=\"weight\" name=\"weight\">\n                  <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 2.72, 3.21, 4.00 (kilogram)</small>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Cat type</label>\n                <br>\n                <select id=\"type\" name=\"type\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Intact Adult (แมวโตเต็มวัยที่ทำหมัน)</option>\n                    <option value=2>Neutered Adult(แมวโตเต็มวัยทั่วไป)</option>\n                    <option value=3>Obese prone (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)</option>\n                    <option value=4>Weight loss(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)</option>\n                    <option value=5>Kitten (ลูกแมว)</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n                <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n              </div>\n              <div class=\"form-group\">\n              <center>\n                <!--submit button-->\n                <button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\">Save</button>\n              </center>\n              </div>\n              \n            </fieldset>\n          </form>\n        </div>",
+        "output": "str",
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "9ea49b4adb2b3ad1"
+            ]
+        ]
+    },
+    {
+        "id": "c3cd974b721e3de9",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 1050,
+        "y": 500,
+        "wires": [
+            [
+                "ac9afaf4c420f036"
+            ]
+        ]
+    },
+    {
+        "id": "fbdc9b198d968dc8",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name FROM catinfo;",
+        "name": "info DB",
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "3631cd92b1d4e3ac"
+            ]
+        ]
+    },
+    {
+        "id": "cd9fe468fd8fc6b8",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "UPDATE",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "UPDATE catinfo set name = '{{payload.name}}', weight = '{{payload.weight}}', des = '{{payload.des}}', type = '{{payload.type}}'",
+        "output": "str",
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "792aee0f29481f1f"
+            ]
+        ]
+    },
+    {
+        "id": "d0ac203736958876",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{{topic}}} WHERE name = '{{name}}'",
+        "output": "str",
+        "x": 920,
+        "y": 500,
+        "wires": [
+            [
+                "c3cd974b721e3de9"
+            ]
+        ]
+    },
+    {
+        "id": "3631cd92b1d4e3ac",
+        "type": "change",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[0].name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 500,
+        "wires": [
+            [
+                "d0ac203736958876"
+            ]
+        ]
+    },
+    {
+        "id": "707559ee99e96d7b",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "footer",
+        "field": "footer",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!-- Footer -->\n<br><br><br><br>\n    <footer class=\"page-footer font-small unique-color-dark\">\n        <!--blue strap-->\n    <div style=\"background-color: #75caeb;\"><br><br></div>\n  \n    <!-- Footer Links -->\n    <div class=\"container text-center text-md-left mt-5\">\n  \n      <!-- Grid row -->\n      <div class=\"row mt-3\">\n  \n        <!-- Grid column -->\n        <div class=\"col-md-3 col-lg-4 col-xl-3 mx-auto mb-4\">\n          <h6 class=\"text-uppercase font-weight-bold\">Background</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p>This website is part of \"Development of an automatic cat feeder controlled by web application\" project. This project presented by Darunsikkhalai School's student</p>\n  \n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Member</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p>Bhavida    Phussadisophon</p>\n          <p>Singha     Junchan</p>\n          <p>Naphat     Saereerak</p>\n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-3 col-lg-2 col-xl-2 mx-auto mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Useful links</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p><a href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\">Bootswatch</a></p>\n          <p><a href=\"https://bootswatch.com/lumen/\">Lumen theam</a></p>\n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Contact</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p><i class=\"fas fa-envelope mr-3\"></i> bhavida.phussadisophon@mail.kmutt.sc.th</p>\n          <p><i class=\"fas fa-envelope mr-3\"></i> singha.junchan@mail.kmutt.sc.th</p>\n          <p><i class=\"fas fa-envelope mr-3\"></i> naphat.saereerak@mail.kmutt.sc.th</p>\n        </div>\n        <!-- Grid column -->\n        </div>\n      <!-- Grid row -->\n      </div>\n    <!-- Footer Links -->\n  \n    <!-- Copyright -->\n    <div class=\"footer-copyright text-center py-3\">© 2020 Copyright:\n      <a href=\"/home\"> CatFeeder</a>\n    </div>\n    <!-- Copyright -->\n  \n  </footer>\n  <!-- Footer -->",
+        "output": "str",
+        "x": 910,
+        "y": 220,
+        "wires": [
+            [
+                "6e6a8b2e10c8b0cc"
+            ]
+        ]
+    },
+    {
+        "id": "0e162fc900a659cc",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "footer",
+        "field": "footer",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!-- Footer -->\n<br><br><br><br>\n    <footer class=\"page-footer font-small unique-color-dark\">\n        <!--blue strap-->\n    <div style=\"background-color: #75caeb;\"><br><br></div>\n  \n    <!-- Footer Links -->\n    <div class=\"container text-center text-md-left mt-5\">\n  \n      <!-- Grid row -->\n      <div class=\"row mt-3\">\n  \n        <!-- Grid column -->\n        <div class=\"col-md-3 col-lg-4 col-xl-3 mx-auto mb-4\">\n          <h6 class=\"text-uppercase font-weight-bold\">Background</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p>This website is part of \"Development of an automatic cat feeder controlled by web application\" project. This project presented by Darunsikkhalai School's student</p>\n  \n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-2 col-lg-2 col-xl-2 mx-auto mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Member</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p>Bhavida    Phussadisophon</p>\n          <p>Singha     Junchan</p>\n          <p>Naphat     Saereerak</p>\n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-3 col-lg-2 col-xl-2 mx-auto mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Useful links</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p><a href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\">Bootswatch</a></p>\n          <p><a href=\"https://bootswatch.com/lumen/\">Lumen theam</a></p>\n        </div>\n        <!-- Grid column -->\n  \n        <!-- Grid column -->\n        <div class=\"col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4\">\n  \n          <!-- Links -->\n          <h6 class=\"text-uppercase font-weight-bold\">Contact</h6>\n          <hr class=\"deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto\" style=\"width: 60px;\">\n          <p><i class=\"fas fa-envelope mr-3\"></i> bhavida.phussadisophon@mail.kmutt.sc.th</p>\n          <p><i class=\"fas fa-envelope mr-3\"></i> singha.junchan@mail.kmutt.sc.th</p>\n          <p><i class=\"fas fa-envelope mr-3\"></i> naphat.saereerak@mail.kmutt.sc.th</p>\n        </div>\n        <!-- Grid column -->\n        </div>\n      <!-- Grid row -->\n      </div>\n    <!-- Footer Links -->\n  \n    <!-- Copyright -->\n    <div class=\"footer-copyright text-center py-3\">© 2020 Copyright:\n      <a href=\"/home\"> CatFeeder</a>\n    </div>\n    <!-- Copyright -->\n  \n  </footer>\n  <!-- Footer -->",
+        "output": "str",
+        "x": 870,
+        "y": 400,
+        "wires": [
+            [
+                "3d9a5f35bf4ea30f"
+            ]
+        ]
+    },
+    {
+        "id": "6e6a8b2e10c8b0cc",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "nav",
+        "field": "nav",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>",
+        "output": "str",
+        "x": 1030,
+        "y": 220,
+        "wires": [
+            [
+                "0bd24e0e8214a0cb"
+            ]
+        ]
+    },
+    {
+        "id": "3d9a5f35bf4ea30f",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "nav",
+        "field": "nav",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>",
+        "output": "str",
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "d720c3315fc5141d"
+            ]
+        ]
+    },
+    {
+        "id": "576d82145f56c6c1",
+        "type": "debug",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f22a50badac294aa",
+        "type": "debug",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d7ac130399d2b9aa",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "keep schedule",
+        "info": "",
+        "x": 200,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "6187e95db25d21a4",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "update schedule",
+        "info": "",
+        "x": 480,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "3d1e95b8cb3cab4e",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "remake schedule",
+        "info": "",
+        "x": 480,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "422628fcb524773e",
+        "type": "change",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "req",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "res",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "name",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "20b324901008a5b6"
+            ]
+        ]
+    },
+    {
+        "id": "20b324901008a5b6",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, * FROM schedule ORDER BY time ASC;",
+        "name": "DB",
+        "x": 670,
+        "y": 620,
+        "wires": [
+            [
+                "f22a50badac294aa"
+            ]
+        ]
+    },
+    {
+        "id": "e124bfa40604b623",
+        "type": "inject",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.name",
+                "v": "hill",
+                "vt": "str"
+            },
+            {
+                "p": "payload.weight",
+                "v": "5.0",
+                "vt": "str"
+            },
+            {
+                "p": "payload.type",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "p": "payload.sche",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "p": "payload.des",
+                "v": "hello world",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 80,
+        "y": 660,
+        "wires": [
+            [
+                "cd9fe468fd8fc6b8"
+            ]
+        ]
+    },
+    {
+        "id": "ac9afaf4c420f036",
+        "type": "switch",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "property": "payload.sche",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1190,
+        "y": 500,
+        "wires": [
+            [
+                "fed5d186c329f834"
+            ],
+            [
+                "422628fcb524773e"
+            ]
+        ]
+    },
+    {
+        "id": "792aee0f29481f1f",
+        "type": "change",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "weight",
+                "pt": "msg",
+                "to": "payload.weight",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "type",
+                "pt": "msg",
+                "to": "payload.type",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 500,
+        "wires": [
+            [
+                "fbdc9b198d968dc8"
+            ]
+        ]
+    },
+    {
+        "id": "c9fd59362167d331",
+        "type": "sqlitedb",
+        "db": "/home/CatFeeder/database/demo.db",
+        "mode": "RWC"
+    }
+]
