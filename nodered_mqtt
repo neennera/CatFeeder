@@ -20,8 +20,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 750,
-        "y": 780,
+        "x": 730,
+        "y": 640,
         "wires": []
     },
     {
@@ -38,8 +38,8 @@
         "correl": "",
         "expiry": "",
         "broker": "7cf2ed1e5a6a59be",
-        "x": 920,
-        "y": 620,
+        "x": 900,
+        "y": 500,
         "wires": []
     },
     {
@@ -57,13 +57,13 @@
         "once": false,
         "onceDelay": "60",
         "topic": "",
-        "payload": "hello world",
+        "payload": "YO YO AUGUST!!!",
         "payloadType": "str",
-        "x": 330,
-        "y": 520,
+        "x": 270,
+        "y": 400,
         "wires": [
             [
-                "9c5799b950457d3d"
+                "72fe87e0f3fb9f95"
             ]
         ]
     },
@@ -84,8 +84,8 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 310,
-        "y": 460,
+        "x": 290,
+        "y": 340,
         "wires": [
             [
                 "ad8e9d52757ddd3e"
@@ -105,8 +105,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
-        "y": 560,
+        "x": 890,
+        "y": 440,
         "wires": []
     },
     {
@@ -120,8 +120,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 460,
+        "x": 760,
+        "y": 340,
         "wires": [
             [
                 "5b2d28ba133c832d"
@@ -136,8 +136,8 @@
         "sqlquery": "fixed",
         "sql": "SELECT * FROM schedule;",
         "name": "SELECT",
-        "x": 640,
-        "y": 460,
+        "x": 620,
+        "y": 340,
         "wires": [
             [
                 "19ab4ed121632913"
@@ -155,8 +155,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 460,
+        "x": 450,
+        "y": 340,
         "wires": [
             [
                 "ab55aa286822c59b"
@@ -174,8 +174,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 520,
+        "x": 550,
+        "y": 380,
         "wires": [
             [
                 "ab55aa286822c59b"
@@ -193,8 +193,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 620,
+        "x": 440,
+        "y": 500,
         "wires": [
             [
                 "5dac595be92ca6a3"
@@ -228,11 +228,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 680,
-        "y": 620,
+        "x": 660,
+        "y": 500,
         "wires": [
             [
-                "d5de0df444996fdb",
                 "72fe87e0f3fb9f95"
             ]
         ]
@@ -242,16 +241,16 @@
         "type": "mqtt in",
         "z": "d471602836679556",
         "name": "",
-        "topic": "catfeeder",
+        "topic": "",
         "qos": "1",
         "datatype": "auto",
         "broker": "7cf2ed1e5a6a59be",
         "nl": false,
         "rap": true,
         "rh": 0,
-        "inputs": 0,
-        "x": 380,
-        "y": 780,
+        "inputs": 1,
+        "x": 350,
+        "y": 640,
         "wires": [
             [
                 "620779678042bc5b"
@@ -278,7 +277,9 @@
         "x": 320,
         "y": 200,
         "wires": [
-            []
+            [
+                "c90e79c27b5f1866"
+            ]
         ]
     },
     {
@@ -287,26 +288,97 @@
         "z": "d471602836679556",
         "name": "Day Setup",
         "info": "",
-        "x": 230,
-        "y": 100,
+        "x": 220,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "0aac06d8a2cc59b4",
+        "id": "29ff4d2734a72bf4",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 950,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a9ecf538b4c87684",
         "type": "function",
         "z": "d471602836679556",
         "name": "",
-        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const amount = msg.payload[i].amount;\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, amount }));\n    if(msg.timestamp==msg.payload[i].time)\n        node.send(msg.payload[i]);\n}",
+        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, row: (i+1) }));\n    node.send(msg.payload[i]);\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 580,
+        "x": 660,
         "y": 200,
         "wires": [
-            []
+            [
+                "5a22ffb5391af81c"
+            ]
         ]
+    },
+    {
+        "id": "c90e79c27b5f1866",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT rowid, time FROM schedule;",
+        "name": "SELECT",
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "a9ecf538b4c87684"
+            ]
+        ]
+    },
+    {
+        "id": "5a22ffb5391af81c",
+        "type": "template",
+        "z": "d471602836679556",
+        "name": "UPDATE",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "UPDATE schedule set status=0 WHERE time = '{{time}}'",
+        "output": "str",
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "29ff4d2734a72bf4"
+            ]
+        ]
+    },
+    {
+        "id": "bcaa8fa63676baf1",
+        "type": "comment",
+        "z": "d471602836679556",
+        "name": "Feed Out",
+        "info": "",
+        "x": 220,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "265b6a214d045093",
+        "type": "comment",
+        "z": "d471602836679556",
+        "name": "Feed In",
+        "info": "",
+        "x": 210,
+        "y": 580,
+        "wires": []
     },
     {
         "id": "7cf2ed1e5a6a59be",
