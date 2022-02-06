@@ -1,0 +1,343 @@
+[
+    {
+        "id": "d471602836679556",
+        "type": "tab",
+        "label": "MQTT_timer",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "620779678042bc5b",
+        "type": "debug",
+        "z": "d471602836679556",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "72fe87e0f3fb9f95",
+        "type": "mqtt out",
+        "z": "d471602836679556",
+        "name": "",
+        "topic": "catfeeder",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7cf2ed1e5a6a59be",
+        "x": 920,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5a8a2a0be3a0e386",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "testing inject",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "60",
+        "topic": "",
+        "payload": "hello world",
+        "payloadType": "str",
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "9c5799b950457d3d"
+            ]
+        ]
+    },
+    {
+        "id": "1a56eded7a60ef6d",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "1-min inject",
+        "props": [
+            {
+                "p": "time",
+                "v": "12:00",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "ad8e9d52757ddd3e"
+            ]
+        ]
+    },
+    {
+        "id": "d5de0df444996fdb",
+        "type": "debug",
+        "z": "d471602836679556",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "19ab4ed121632913",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "",
+        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const amount = msg.payload[i].amount;\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, amount }));\n    if(msg.timestamp==msg.payload[i].time)\n        node.send(msg.payload[i]);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 460,
+        "wires": [
+            [
+                "5b2d28ba133c832d"
+            ]
+        ]
+    },
+    {
+        "id": "ab55aa286822c59b",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM schedule;",
+        "name": "SELECT",
+        "x": 640,
+        "y": 460,
+        "wires": [
+            [
+                "19ab4ed121632913"
+            ]
+        ]
+    },
+    {
+        "id": "ad8e9d52757ddd3e",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "timestamp",
+        "func": "var d = new Date();\nvar hr = d.getHours()+7;\nvar min = d.getMinutes();\nif (min < 10) {\n    min = \"0\" + min;\n}\n\nvar t = hr+\":\"+min;\n\nmsg.timestamp= t;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 460,
+        "wires": [
+            [
+                "ab55aa286822c59b"
+            ]
+        ]
+    },
+    {
+        "id": "9c5799b950457d3d",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "timestamp",
+        "func": "var t = \"17\"+\":\"+\"00\";\n\nmsg.timestamp= t;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 520,
+        "wires": [
+            [
+                "ab55aa286822c59b"
+            ]
+        ]
+    },
+    {
+        "id": "5b2d28ba133c832d",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "",
+        "func": "msg.payload = parseFloat(msg.amount);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 620,
+        "wires": [
+            [
+                "5dac595be92ca6a3"
+            ]
+        ]
+    },
+    {
+        "id": "5dac595be92ca6a3",
+        "type": "change",
+        "z": "d471602836679556",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "time",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "amount",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "des",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 620,
+        "wires": [
+            [
+                "d5de0df444996fdb",
+                "72fe87e0f3fb9f95"
+            ]
+        ]
+    },
+    {
+        "id": "c56991c34a24779c",
+        "type": "mqtt in",
+        "z": "d471602836679556",
+        "name": "",
+        "topic": "catfeeder",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7cf2ed1e5a6a59be",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 380,
+        "y": 780,
+        "wires": [
+            [
+                "620779678042bc5b"
+            ]
+        ]
+    },
+    {
+        "id": "23cce7e710f8c66d",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "midnight reset",
+        "props": [
+            {
+                "p": "time",
+                "v": "12:00",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "01 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 320,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be896c644e71522d",
+        "type": "comment",
+        "z": "d471602836679556",
+        "name": "Day Setup",
+        "info": "",
+        "x": 230,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0aac06d8a2cc59b4",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "",
+        "func": "for (let i = 0; i < msg.payload.length; i++) {\n    const el = msg.payload[i];\n    const amount = msg.payload[i].amount;\n    const entries = Object.entries(el).map(([topic, payload]) => ({ topic, payload, amount }));\n    if(msg.timestamp==msg.payload[i].time)\n        node.send(msg.payload[i]);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7cf2ed1e5a6a59be",
+        "type": "mqtt-broker",
+        "name": "CatFeeder",
+        "broker": "broker.mqttdashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c9fd59362167d331",
+        "type": "sqlitedb",
+        "db": "/home/CatFeeder/database/demo.db",
+        "mode": "RWC"
+    }
+]
