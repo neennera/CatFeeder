@@ -1,23 +1,71 @@
 <html>
-    <head>
-
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Homie</title>
+    <title>schedule</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css" integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    
+    <!--link rel="stylesheet" href="style.css"-->
     <style>
-    {{{style}}}
-    </style>
+      {{{style}}}
+      </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     
+    <div class="container-fluid maxWidth">
+    <div>
+        <center><h2>schedule</h2></center>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Amount of food</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--display value of payload-->
+          {{#payload}}
+        <!--tr class="table-active"-->
+        
+          <tr class="table-light">
+            <td scope="row">{{time}}</td>
+            <td scope="row">{{amount}}</td>
+            <td scope="row">{{des}}</td>
+
+            <!--<span class="badge bg-success">Success</span>-->
+            <!--'<span class="badge bg-success">' . Success . '</span>'-->
+            
+            
+            <script>
+              function myFunction() {
+              var x = document.getElementById("myDIV");
+              var y = 0;
+              if (y.style.display == 0) {
+                y.style.display = "block";
+              } else {
+                y.style.display = "none";
+              }
+            }
+            </script>
+            <td scope="rozzw"><div id="myDIV" class="badge bg-success">Success</div></td>
+
+            <td scope="row"><a href="/schedule/delete/{{rowid}}"><button class="btn btn-warning">Delete</button></a></td>
+          </tr>
+        <!--/tr-->
+          {{/payload}}
+        </tbody>
+      </table>
+    </div>
+    <br><br>
     
-
-    </head>
-
-    <body>
-
-    </body>
+</body>
 </html>
