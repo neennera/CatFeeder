@@ -1,50 +1,53 @@
 <!--nav-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/home">Cat Feeder</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/schedule">Schedule</a>
-              <li class="nav-item">
-                <a class="nav-link" href="/monitor">Monitor</a>
-              <li class="nav-item">
-                <a class="nav-link" href="/catinfo">Cat Information</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <br><br>
-    
-  <!--Pop up info-->
-  <div id="simpleModal" class="bg-modal">
-    <div class="modal-contents">
-      <div class="close">+</div>
-      
-      <center><p><h3> วิธีการใช้งาน </h3></p></center>
-      <p>บลาๆๆๆ</p>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">Cat Feeder</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/schedule">Schedule</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/monitor">Monitor</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/catinfo">Cat Information</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
+    <button type="button" id="button" class="btn btn-secondary" style="margin-left: 8px;">?</button>
   </div>
+</nav>
+<br><br>
 
-  <!--pop up script-->
-  <script>
-    document.getElementById('button').addEventListener("click", function() {
-	  document.querySelector('.bg-modal').style.display = "flex";});
+<!--Pop up info-->
+<div id="simpleModal" class="bg-modal">
+<div class="modal-contents">
+<div class="close">+</div>
 
-    document.querySelector('.close').addEventListener("click", function() {
-	  document.querySelector('.bg-modal').style.display = "none";});
-  </script>
+<center><p><h3> วิธีการใช้งาน </h3></p></center>
+  <div style="text-align: center;  border: 3px; position: absolute;  top: 50%;">
+  <p>ผู้ใช้สามารถเข้าถึงหน้าเว็บเพจได้ 6 เว็บเพจ ได้แก่ หน้าหลัก, หน้าดูตารางให้อาหารแมว, หน้าติดตามมอนิเตอร์ และหน้าข้อมูลของแมวสัตว์เลี้ยง เรายังมีหน้าย่อยซึ่งเป็นส่วนเสริมในการแก้ไขข้อมูลแมวสัตว์เลี้ยง ซึ่งจะเข้าถึงได้จากหน้าดูข้อมูลแมวเท่านั้น </p><br><br>
+  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขตารางการให้อาหาร เช่น การลบเวลาให้อาหาร การเพิ่มเวลาให้อาหารได้ในหน้าดูตารางให้อาหารแมว(/schedule)</p><br><br>
+  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขข้อมูลของแมว เช่น น้ำหนัก ประเภท รวมทั้งคำนวนตารางอาหารได้ใหม่ ในหน้าแก้ไขข้อมูลของแมว(/catedit)</p><br><br>
+  </div>
+</div>
+</div>
 
-  <!--!pop up style-->
+<!--pop up script-->
+<script>
+document.getElementById('button').addEventListener("click", function() {
+document.querySelector('.bg-modal').style.display = "flex";});
+
+document.querySelector('.close').addEventListener("click", function() {
+document.querySelector('.bg-modal').style.display = "none";});
+</script>
   
 
 <!-- Footer -->

@@ -8,7 +8,7 @@
     }
 
 .column{
-    float: center;
+    /*float: center;*/
     width: 50%;  
     
 }
@@ -158,6 +158,7 @@ $accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w
 	width: 100%;
 	height: 100%;
 	position: absolute;
+    z-index: 1;
 	top: 0;
 	display: none;
 	justify-content: center;
@@ -171,6 +172,7 @@ $accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w
 	text-align: center;
 	padding: 10px;
 	position: relative;
+    z-index: ;
 
 }
 

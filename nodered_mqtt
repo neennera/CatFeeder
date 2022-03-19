@@ -8,28 +8,11 @@
         "env": []
     },
     {
-        "id": "620779678042bc5b",
-        "type": "debug",
-        "z": "d471602836679556",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 730,
-        "y": 640,
-        "wires": []
-    },
-    {
         "id": "72fe87e0f3fb9f95",
         "type": "mqtt out",
         "z": "d471602836679556",
         "name": "",
-        "topic": "catfeeder",
+        "topic": "catfeeder_command",
         "qos": "2",
         "retain": "true",
         "respTopic": "",
@@ -38,7 +21,7 @@
         "correl": "",
         "expiry": "",
         "broker": "7cf2ed1e5a6a59be",
-        "x": 900,
+        "x": 940,
         "y": 500,
         "wires": []
     },
@@ -57,13 +40,13 @@
         "once": false,
         "onceDelay": "60",
         "topic": "",
-        "payload": "YO YO AUGUST!!!",
+        "payload": "YO YO WORLD!!!",
         "payloadType": "str",
         "x": 270,
         "y": 400,
         "wires": [
             [
-                "72fe87e0f3fb9f95"
+                "9c5799b950457d3d"
             ]
         ]
     },
@@ -91,23 +74,6 @@
                 "ad8e9d52757ddd3e"
             ]
         ]
-    },
-    {
-        "id": "d5de0df444996fdb",
-        "type": "debug",
-        "z": "d471602836679556",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 890,
-        "y": 440,
-        "wires": []
     },
     {
         "id": "19ab4ed121632913",
@@ -168,14 +134,14 @@
         "type": "function",
         "z": "d471602836679556",
         "name": "timestamp",
-        "func": "var t = \"17\"+\":\"+\"00\";\n\nmsg.timestamp= t;\nreturn msg;",
+        "func": "var t = \"12\"+\":\"+\"00\";\n\nmsg.timestamp= t;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 380,
+        "x": 430,
+        "y": 400,
         "wires": [
             [
                 "ab55aa286822c59b"
@@ -187,7 +153,7 @@
         "type": "function",
         "z": "d471602836679556",
         "name": "",
-        "func": "msg.payload = parseFloat(msg.amount);\nreturn msg;",
+        "func": "msg.payload = msg.time + ','+ parseFloat(msg.amount);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -232,7 +198,8 @@
         "y": 500,
         "wires": [
             [
-                "72fe87e0f3fb9f95"
+                "72fe87e0f3fb9f95",
+                "6ab5057d8fc4585f"
             ]
         ]
     },
@@ -241,19 +208,19 @@
         "type": "mqtt in",
         "z": "d471602836679556",
         "name": "",
-        "topic": "",
-        "qos": "1",
+        "topic": "catfeeder_report",
+        "qos": "2",
         "datatype": "auto",
         "broker": "7cf2ed1e5a6a59be",
         "nl": false,
         "rap": true,
         "rh": 0,
-        "inputs": 1,
-        "x": 350,
+        "inputs": 0,
+        "x": 380,
         "y": 640,
         "wires": [
             [
-                "620779678042bc5b"
+                "ee25bcc1bd3c7fee"
             ]
         ]
     },
@@ -378,6 +345,190 @@
         "info": "",
         "x": 210,
         "y": 580,
+        "wires": []
+    },
+    {
+        "id": "441a8938e81815de",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "timestamp",
+        "func": "\nmsg.payload= Math.floor(Math.random()*100000)%200;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 440,
+        "wires": [
+            [
+                "72fe87e0f3fb9f95"
+            ]
+        ]
+    },
+    {
+        "id": "08c25314d6a6409e",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "154.5",
+        "payloadType": "str",
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [
+                "441a8938e81815de"
+            ]
+        ]
+    },
+    {
+        "id": "5f4e325bc5518d5f",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 730,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee25bcc1bd3c7fee",
+        "type": "template",
+        "z": "d471602836679556",
+        "name": "UPDATE",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "UPDATE schedule set status=1 WHERE time = '{{payload}}'",
+        "output": "str",
+        "x": 580,
+        "y": 640,
+        "wires": [
+            [
+                "5f4e325bc5518d5f"
+            ]
+        ]
+    },
+    {
+        "id": "8b1ca26096d97118",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT time, status FROM schedule;",
+        "name": "SELECT",
+        "x": 660,
+        "y": 760,
+        "wires": [
+            [
+                "51d14713ad4bee6d"
+            ]
+        ]
+    },
+    {
+        "id": "51d14713ad4bee6d",
+        "type": "debug",
+        "z": "d471602836679556",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "a2f84f563b2072f4",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "12:00,1.00",
+        "payloadType": "str",
+        "x": 680,
+        "y": 540,
+        "wires": [
+            [
+                "72fe87e0f3fb9f95"
+            ]
+        ]
+    },
+    {
+        "id": "99d049d605e8e44f",
+        "type": "inject",
+        "z": "d471602836679556",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 460,
+        "y": 760,
+        "wires": [
+            [
+                "8b1ca26096d97118"
+            ]
+        ]
+    },
+    {
+        "id": "6ab5057d8fc4585f",
+        "type": "debug",
+        "z": "d471602836679556",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 560,
         "wires": []
     },
     {

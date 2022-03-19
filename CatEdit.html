@@ -24,30 +24,8 @@
         <center><h2>Edit Cat information</h2></center>
       <div class="row">
         
-        <!--Cat information--> 
-      <div class="col-sm .px-2">
-        {{#payload}}
-        <div class="container" style="font-size:16px;">
-          <div class="card p-4">
-              <div class=" image d-flex flex-column justify-content-center align-items-center"><button class="rbtn btn-secondary">
-                  <img src="http://pngimg.com/uploads/cat/cat_PNG50514.png" height="100" width="100" ></button>
-
-                  <span class="name mt-3">{{name}}</span> <br>
-                  <span class="idd" style="font-size:16px;">Weight : {{weight}} kg</span>
-                  <span class="idd" style="font-size:16px;">type : {{type}} </span>
-                  <div class="text mt-3"> <span>{{des}} </span> </div>
-                  <br>
-                  
-                  </div>
-                  <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">                
-                  <center><div class=" card border-secondary mb-3 "> <span class="join text-primary">Last update {{date}}</span> </div> </center>
-                </div>
-              </div>
-          </div>
-          {{/payload}}
-      </div>
-    <!--End of Cat information-->
-
+        
+    {{{catinfo}}}
             
         <!--Edit form-->
         <div class="col-sm .px-2">
@@ -116,12 +94,12 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                  เดี๋ยวต้องเอาข้อมูลจากรายงานมาใส่<br>
-                  <strong>Intact Adult</strong> (แมวโตเต็มวัยที่ทำหมัน)<br>
-                  <strong>Neutered Adult</strong>(แมวโตเต็มวัยทั่วไป)<br>
-                  <strong>Obese prone</strong> (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)<br>
-                  <strong>Weight loss</strong>(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)
-              </div>
+                  <strong>Intact Adult</strong> แมวโตเต็มวัยที่ทำหมัน คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่ผ่านจะทำหมันแล้ว<br>
+                  <strong>Neutered Adult</strong> แมวโตเต็มวัยทั่วไป คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่ยังไม่ผ่านจะทำหมันแล้ว<br>
+                  <strong>Obese prone</strong> แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่น้ำหนักเพิ่มขึ้นอย่างต่อเนื่องและผู้ใช้ต้องการควบคุมน้ำหนัก <br>
+                  <strong>Weight loss</strong> แมวโตเต็มวัยที่ต้องการลดน้ำหนัก คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่มีน้ำหนักเกินเกณฑ์มาตรฐานหรือผู็ใช้ต้องการลดน้ำหนัก <br>
+                  <strong>Kitten</strong> ลูกแมว คือ แมวในช่วงอายุน้อยกว่า 12 เดือน<br>
+                </div>
             </div>
           </div>
           <div class="accordion-item">
@@ -132,21 +110,21 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                <strong>Old Schedule</strong>  คือ บลาบลาบลา<br>
-                <strong>Update Schedule</strong>  คือ บลาบลาบลา<br>
-                <strong>Get New schedule</strong>  คือ บลาบลาบลา<br>
+                <strong>Old Schedule</strong>  คือ การเก็บตารางเดิมเอาไว้ ไม่มีการเปลี่ยนแปลงทั้งเวลาและปริมาณ แมวจะได้รับอาหารตารางที่วางเอาไว้เหมือนเดิมทุกประการ<br>
+                <strong>Update Schedule</strong>  คือ การเก็บเวลาการให้อาหารเดิมเอาไว้ แต่จะมีการเปลี่ยนปริมาณอาหารให้เหมาะสมกับลักษณะของแมวในปัจจุบัน แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
+                <strong>Get New schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ โดยคำนวนเวลาและปริมาณอาหารที่เหมาะสมตามค่าพลังงานขณะพัก หรือ RER แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
               </div>
             </div>
           </div>
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingThree">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Accordion Item #3
+                ฉันควรใส่อะไรลงไปในการแก้ไขข้อมูลแมวบ้าง?
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                ผู้ใช้ควรใส่น้ำหนักและประเภทของแมวให้ถูกต้องและบรรยายความเปลี่ยนแปลงที่เกินขึ้นกับแมวในช่วงเวลา 1-2 สัปดาห์ที่ผ่านมา
               </div>
             </div>
           </div>
