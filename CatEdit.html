@@ -26,18 +26,41 @@
         
         
     {{{catinfo}}}
-            
+        
         <!--Edit form-->
+        <script>
+          function validateForm() {
+            let x = document.forms["CatEditForm"]["name"].value;
+            if (x == "") { alert("Name Item must be filled out"); return false; }
+
+            let x = document.forms["CatEditForm"]["weight"].value;
+            var w=parseFloat(x).toFixed(0)
+            if (x == "") { alert("Weight must be filled out"); return false; }
+            if (w<1 || w>15) { alert("Weight Item must be in range 1-15 kg"); return false; }
+
+            let x = document.forms["CatEditForm"]["type"].value;
+            if (x == "") { alert("Type Item must be filled out"); return false; }
+
+            let x = document.forms["CatEditForm"]["sche"].value;
+            if (x == "") { alert("Schedule Edit Item must be filled out"); return false; }
+
+            let x = document.forms["CatEditForm"]["des"].value;
+            if (x == "") { alert("Description Item must be filled out"); return false; }
+        
+            return true;
+          }
+        </script>
+        
         <div class="col-sm .px-2">
-        <form method="POST" action="/catinfo"> <!--action to post of /catedit-->
+        <form name="CatEditForm" method="POST" action="/catinfo" onsubmit="return validateForm()"> <!--action to post of /catedit-->
             <fieldset>
                 <div class="form-group">
-                    <label for="mount" class="form-label mt-4" style="font-weight: bold;">Name</label>
-                    <input class="form-control" id="name" name="name">
+                    <label for="mount" class="form-label mt-4" style="font-weight: bold;" >Name</label>
+                    <input class="form-control" id="name" name="name" required>
                 </div>
               <div class="form-group">
                   <label for="mount" class="form-label mt-4" style="font-weight: bold;">Weight</label>                  
-                  <input class="form-control" id="weight" name="weight">
+                  <input class="form-control" id="weight" name="weight" required>
                   <small id="emailHelp" class="form-text text-muted">Example : 2.72, 3.21, 4.00 (kilogram)</small>
               </div>
               <div class="form-group">
@@ -62,7 +85,7 @@
               </div>
               <div class="form-group">
                 <label for="des" class="form-label mt-4" style="font-weight: bold;">Description</label>
-                <input type="text" class="form-control" id="des" name="des">
+                <input type="text" class="form-control" id="des" name="des" required>
               </div>
               <div class="form-group">
               <center>
