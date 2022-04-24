@@ -1,5 +1,5 @@
 //find number of feeding per day
-//var CPG=msg.CpG.toFixed(2);
+var CPG=parseFloat(msg.CPG).toFixed(2);
 var RER=msg.RER.toFixed(2);
 var count = RER/30;
 count = Math.floor((count+1)/2)*2;
@@ -18,7 +18,7 @@ function Half_Day(h,m,ct){
     var step = 600/((count/2)-1);
 
     msg.time= get_time(h) + ":" + get_time(m);
-    msg.amount=(RER_P).toFixed(2);
+    msg.amount=(RER_P/CPG).toFixed(2);
     msg.des="feeding no." + (1+ct).toString();
     msg.count=1;
     node.send(msg);
@@ -28,11 +28,12 @@ function Half_Day(h,m,ct){
         h+=Math.floor(m/60);
         m=Math.floor(m%60);
         msg.time= get_time(h) + ":" + get_time(m);
-        msg.amount=(RER_P).toFixed(2);
+        msg.amount=(RER_P/CPG).toFixed(2);
         msg.des="feeding no." + (i+ct).toString();
         msg.count=i;
         node.send(msg);
     }
+
 }
 
 Half_Day(1,0,0)

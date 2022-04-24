@@ -74,6 +74,12 @@
                           </select>
                         </div>
                         <div class="form-group">
+                          <label for="des" class="form-label mt-4" style="font-weight: bold;">Calories Per Gram(CPG)</label>
+                          <input type="text" class="form-control" id="des" name="des" required>
+                          <small id="emailHelp" class="form-text text-muted">ปริมาณแคลลอรี่ที่อาหารเม็ด 1 กรัมให้ Example : 5.3 calories/gram</small>
+                        </div>
+                        
+                        <div class="form-group">
                           <label for="des" class="form-label mt-4" style="font-weight: bold;">Description</label>
                           <input type="text" class="form-control" id="des" name="des" required>
                         </div>
@@ -126,6 +132,7 @@
                 <strong>Old Schedule</strong>  คือ การเก็บตารางเดิมเอาไว้ ไม่มีการเปลี่ยนแปลงทั้งเวลาและปริมาณ แมวจะได้รับอาหารตารางที่วางเอาไว้เหมือนเดิมทุกประการ<br>
                 <strong>Update Schedule</strong>  คือ การเก็บเวลาการให้อาหารเดิมเอาไว้ แต่จะมีการเปลี่ยนปริมาณอาหารให้เหมาะสมกับลักษณะของแมวในปัจจุบัน แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
                 <strong>Get New schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ โดยคำนวนเวลาและปริมาณอาหารที่เหมาะสมตามค่าพลังงานขณะพัก หรือ RER แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
+                <strong>One feed schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ <br>
               </div>
             </div>
           </div>
@@ -139,6 +146,20 @@
               <div class="accordion-body">
                 ผู้ใช้ควรใส่น้ำหนักและประเภทของแมวให้ถูกต้องและบรรยายความเปลี่ยนแปลงที่เกินขึ้นกับแมวในช่วงเวลา 1-2 สัปดาห์ที่ผ่านมา
               </div>
+            </div>
+          </div>
+
+          
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-expanded="false" aria-controls="collapseFour">
+                What is calories per gram(CPG)? ค่า calories per gram(CPG) คืออะไร?
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <strong> ค่า calories per gram(CPG)</strong> คือ ค่าพลังงานปริมาณที่อาหารเม็ด 1 กรัมจะให้ได้แก่แมว โดยจะแตกต่างกันไปตามยี่ห้อของอาหารเม็ด<br>
+                </div>
             </div>
           </div>
         </div>
