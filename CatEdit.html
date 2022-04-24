@@ -36,6 +36,10 @@
                       let x = document.forms["CatEditForm"]["weight"].value;
                       var w=parseFloat(x).toFixed(0)
                       if (w<=0 || w>15) { alert("Weight Item must be in range 1-15 kg"); return false; }
+
+                      let y = document.forms["CatEditForm"]["CPG"].value;
+                      var c=parseFloat(y).toFixed(0)
+                      if (c<=0 || c>7) { alert("c Item must be in range 0-7 calories/gram"); return false; }
                       return true;
                     }
                   </script>
@@ -74,8 +78,8 @@
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="des" class="form-label mt-4" style="font-weight: bold;">Calories Per Gram(CPG)</label>
-                          <input type="text" class="form-control" id="des" name="des" required>
+                          <label for="CPG" class="form-label mt-4" style="font-weight: bold;">Calories Per Gram(CPG)</label>
+                          <input type="text" class="form-control" id="CPG" name="CPG" required>
                           <small id="emailHelp" class="form-text text-muted">ปริมาณแคลลอรี่ที่อาหารเม็ด 1 กรัมให้ Example : 5.3 calories/gram</small>
                         </div>
                         
@@ -132,7 +136,7 @@
                 <strong>Old Schedule</strong>  คือ การเก็บตารางเดิมเอาไว้ ไม่มีการเปลี่ยนแปลงทั้งเวลาและปริมาณ แมวจะได้รับอาหารตารางที่วางเอาไว้เหมือนเดิมทุกประการ<br>
                 <strong>Update Schedule</strong>  คือ การเก็บเวลาการให้อาหารเดิมเอาไว้ แต่จะมีการเปลี่ยนปริมาณอาหารให้เหมาะสมกับลักษณะของแมวในปัจจุบัน แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
                 <strong>Get New schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ โดยคำนวนเวลาและปริมาณอาหารที่เหมาะสมตามค่าพลังงานขณะพัก หรือ RER แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>
-                <strong>One feed schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ <br>
+                <strong>One feed schedule</strong>  คือ เป็นการให้อาหารครั้งเดียวต่อวันแบบกำหนดปริมาณ ซึ่งจะช่วยสนับสนุนการลดน้ำหนักและมวลไขมันที่ทำให้ลดลงความเสี่ยงในการเป็นโรคอ้วนในแมว, ช่วยให้การตอบสนองที่ดีขึ้นและยั่งยืนมากขึ้นในฮอร์โมนควบคุมความอยากอาหาร และการจำกัดการบริโภคอาหาร <br>
               </div>
             </div>
           </div>
