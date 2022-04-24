@@ -30,32 +30,18 @@
         <!--Edit form-->
         <script>
           function validateForm() {
-            let x = document.forms["CatEditForm"]["name"].value;
-            if (x == "") { alert("Name Item must be filled out"); return false; }
-
             let x = document.forms["CatEditForm"]["weight"].value;
             var w=parseFloat(x).toFixed(0)
-            if (x == "") { alert("Weight must be filled out"); return false; }
             if (w<1 || w>15) { alert("Weight Item must be in range 1-15 kg"); return false; }
-
-            let x = document.forms["CatEditForm"]["type"].value;
-            if (x == "") { alert("Type Item must be filled out"); return false; }
-
-            let x = document.forms["CatEditForm"]["sche"].value;
-            if (x == "") { alert("Schedule Edit Item must be filled out"); return false; }
-
-            let x = document.forms["CatEditForm"]["des"].value;
-            if (x == "") { alert("Description Item must be filled out"); return false; }
-        
             return true;
           }
         </script>
         
         <div class="col-sm .px-2">
-        <form name="CatEditForm" method="POST" action="/catinfo" onsubmit="return validateForm()"> <!--action to post of /catedit-->
+        <form method="POST" action="/catinfo"> <!--onsubmit="return validateForm()" name="CatEditForm"-->
             <fieldset>
                 <div class="form-group">
-                    <label for="mount" class="form-label mt-4" style="font-weight: bold;" >Name</label>
+                    <label for="mount" class="form-label mt-4" style="font-weight: bold;">Name</label>
                     <input class="form-control" id="name" name="name" required>
                 </div>
               <div class="form-group">
@@ -81,6 +67,7 @@
                     <option value=1>Keep Old Schedule</option>
                     <option value=2>Update Schedule</option>
                     <option value=3>Get New schedule</option>
+                    <option value=4>One feed schedule</option>
                 </select>
               </div>
               <div class="form-group">
@@ -91,6 +78,7 @@
               <center>
                 <!--submit button-->
                 <button type="submit" class="btn btn-success" style="width: 30%">Save</button>
+                <!--<!button type="submit" class="btn btn-success" style="width: 30%" onclick="return validateForm()">Save</button>-->
               </center>
               </div>
               
