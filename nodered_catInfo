@@ -16,7 +16,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!--Cat information--> \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\" style=\"font-size:16px;\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br>\n                <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br>\n                <div class=\" btn btn-lg\" style=\"width:100%\"> <a href=\"/catedit\"><button class=\"btn btn-info\" style=\"width:100%\">Edit Profile</button></a> </div>\n                </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <center><div class=\" card border-secondary mb-3 \"> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    <!--End of Cat information-->",
+        "template": "<!--Cat information--> \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\" style=\"font-size:16px;\">\n        <div class=\"card p-4\" style=\"align:left;margin: 25px 50px 75px 0px;\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                <span class=\"name mt-3\" style=\"width:100%; text-align: center;\">{{name}}</span> <br>\n                <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br>\n                <div class=\" btn btn-lg\" style=\"width:100%\"> <a href=\"/catedit\"><button class=\"btn btn-info\" style=\"width:100%\">Edit Profile</button></a> </div>\n                </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <center><div> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    <!--End of Cat information-->",
         "output": "str",
         "x": 590,
         "y": 160,
@@ -72,7 +72,7 @@
         "sqlquery": "fixed",
         "sql": "SELECT name,type,weight,des,date FROM catinfo;",
         "name": "info DB",
-        "x": 320,
+        "x": 360,
         "y": 160,
         "wires": [
             [
@@ -124,7 +124,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}\n\n\n.bg-modal {\n\tbackground-color: rgba(0, 0, 0, 0.7);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tz-index: 1;\n\ttop: 0;\n\tdisplay: none;\n\tjustify-content: center;\n\talign-items: center;\n}\n\n.modal-contents {\n\theight: 70%;\n\twidth: 60%;\n\tbackground-color: white;\n\ttext-align: center;\n\tpadding: 10px;\n\tposition: relative;\n\tz-index: 1;\n\n\n}\n\n.close {\n    position: absolute;\n    color: #444444;\n    top: 0px;\n    right: 14px;\n    font-size: 42px;\n    transform: rotate(45deg);\n    cursor: pointer;\n\n}}",
         "output": "str",
         "x": 790,
         "y": 220,
@@ -177,7 +177,7 @@
         "name": "Response",
         "statusCode": "",
         "headers": {},
-        "x": 1300,
+        "x": 1260,
         "y": 400,
         "wires": []
     },
@@ -190,7 +190,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Edit information</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"style.css\">\n    <style>\n      {{{style}}}\n      </style>\n</head>\n\n<body>\n  \n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n\n    {{{nav}}}\n    \n    <div class=\"container-fluid maxWidth\">\n        <!--first row-->\n        <center><h2>Edit Cat information</h2></center>\n      <div class=\"row\">\n        \n        <!--Cat information--> \n      <div class=\"col-sm .px-2\">\n        {{#payload}}\n        <div class=\"container\" style=\"font-size:16px;\">\n          <div class=\"card p-4\">\n              <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                  <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                  <span class=\"name mt-3\">{{name}}</span> <br>\n                  <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                  <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                  <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                  <br>\n                  \n                  </div>\n                  <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                  <center><div class=\" card border-secondary mb-3 \"> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n                </div>\n              </div>\n          </div>\n          {{/payload}}\n      </div>\n    <!--End of Cat information-->\n\n            \n        <!--Edit form-->\n        <div class=\"col-sm .px-2\">\n        <form method=\"POST\" action=\"/catinfo\"> <!--action to post of /catedit-->\n            <fieldset>\n                <div class=\"form-group\">\n                    <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Name</label>\n                    <input class=\"form-control\" id=\"name\" name=\"name\">\n                </div>\n              <div class=\"form-group\">\n                  <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Weight</label>                  \n                  <input class=\"form-control\" id=\"weight\" name=\"weight\">\n                  <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 2.72, 3.21, 4.00 (kilogram)</small>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Cat type</label>\n                <br>\n                <select id=\"type\" name=\"type\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Intact Adult (แมวโตเต็มวัยที่ทำหมัน)</option>\n                    <option value=2>Neutered Adult(แมวโตเต็มวัยทั่วไป)</option>\n                    <option value=3>Obese prone (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)</option>\n                    <option value=4>Weight loss(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)</option>\n                    <option value=5>Kitten (ลูกแมว)</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">schedule update</label>\n                <br>\n                <select id=\"sche\" name=\"sche\" class=\"form-select\" aria-label=\"Default select example\">\n                    <option value=1>Keep Old Schedule</option>\n                    <option value=2>Update Schedule</option>\n                    <option value=3>Get New schedule</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n                <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n              </div>\n              <div class=\"form-group\">\n              <center>\n                <!--submit button-->\n                <button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\">Save</button>\n              </center>\n              </div>\n              \n            </fieldset>\n          </form>\n        </div>\n          <!--End of edit form-->\n        \n\n        </div>\n        <!--End of first row-->\n\n        <!--second row-->\n        <div class=\"row\">\n          <br><br><hr><br><br><h2>Information</h2><br><br>\n        <!--information-->\n        \n        <div class=\"accordion\" id=\"accordionExample\" style=\"font-size:17px;\">\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne\">\n              <button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n                What is cat type? ประเภทของแมวคืออะไร?\n              </button>\n            </h2>\n            <div id=\"collapseOne\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                  เดี๋ยวต้องเอาข้อมูลจากรายงานมาใส่<br>\n                  <strong>Intact Adult</strong> (แมวโตเต็มวัยที่ทำหมัน)<br>\n                  <strong>Neutered Adult</strong>(แมวโตเต็มวัยทั่วไป)<br>\n                  <strong>Obese prone</strong> (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)<br>\n                  <strong>Weight loss</strong>(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)\n              </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingTwo\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseTwo\" aria-expanded=\"false\" aria-controls=\"collapseTwo\">\n                Schedule Update? การจัดการตารางมีอะไรบ้าง?\n              </button>\n            </h2>\n            <div id=\"collapseTwo\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                <strong>Old Schedule</strong>  คือ บลาบลาบลา<br>\n                <strong>Update Schedule</strong>  คือ บลาบลาบลา<br>\n                <strong>Get New schedule</strong>  คือ บลาบลาบลา<br>\n              </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingThree\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseThree\" aria-expanded=\"false\" aria-controls=\"collapseThree\">\n                Accordion Item #3\n              </button>\n            </h2>\n            <div id=\"collapseThree\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingThree\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.\n              </div>\n            </div>\n          </div>\n        </div>\n        <!--End of information-->\n        </div>\n        <!--End of second row-->\n    </div>\n  \n    </div>\n\n    {{{footer}}}\n</body>\n</html>\n",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Edit information</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"style.css\">\n    <style>\n      {{{style}}}\n      </style>\n</head>\n\n<body>\n  \n  <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n  <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n  {{{nav}}}\n    \n    <div class=\"container-fluid maxWidth\">\n        <!--first row-->\n        <center><h2>Edit Cat information</h2></center>\n        <div class=\"row\">\n        \n        <!--Cat information-->    \n        {{{catinfo}}}\n        \n        <!--End of Cat information-->\n        <div class=\"column\">\n            <!--Edit form-->\n                <script>\n                    function validateForm() {\n                      let x = document.forms[\"CatEditForm\"][\"weight\"].value;\n                      var w=parseFloat(x).toFixed(0)\n                      if (w<=0 || w>15) { alert(\"Weight Item must be in range 1-15 kg\"); return false; }\n                      return true;\n                    }\n                  </script>\n                  \n                  <div class=\"col-sm .px-2\">\n                  <form method=\"POST\" action=\"/catinfo\" onsubmit=\"return validateForm()\" name=\"CatEditForm\"> <!--onsubmit=\"return validateForm()\" name=\"CatEditForm\"-->\n                      <fieldset>\n                          <div class=\"form-group\">\n                              <label for=\"name\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Name</label>\n                              <input class=\"form-control\" id=\"name\" name=\"name\" required>\n                          </div>\n                        <div class=\"form-group\">\n                            <label for=\"amount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Weight</label>                  \n                            <input class=\"form-control\" id=\"weight\" name=\"weight\" required>\n                            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 2.72, 3.21, 4.00 (kilogram)</small>\n                        </div>\n                        <div class=\"form-group\">\n                          <label for=\"type\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Cat type</label>\n                          <br>\n                          <select id=\"type\" name=\"type\" class=\"form-select\" aria-label=\"Default select example\">\n                              <option value=1>Intact Adult (แมวโตเต็มวัยที่ทำหมัน)</option>\n                              <option value=2>Neutered Adult(แมวโตเต็มวัยทั่วไป)</option>\n                              <option value=3>Obese prone (แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย)</option>\n                              <option value=4>Weight loss(แมวโตเต็มวัยที่ต้องการลดน้ำหนัก)</option>\n                              <option value=5>Kitten (ลูกแมว)</option>\n                          </select>\n                        </div>\n                        <div class=\"form-group\">\n                          <label for=\"sche\" class=\"form-label mt-4\" style=\"font-weight: bold;\">schedule update</label>\n                          <br>\n                          <select id=\"sche\" name=\"sche\" class=\"form-select\" aria-label=\"Default select example\">\n                              <option value=1>Keep Old Schedule</option>\n                              <option value=2>Update Schedule</option>\n                              <option value=3>Get New schedule</option>\n                              <option value=4>One feed schedule</option>\n                          </select>\n                        </div>\n                        <div class=\"form-group\">\n                          <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n                          <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\" required>\n                        </div>\n                        <div class=\"form-group\">\n                        <center>\n                          <!--submit button-->\n                          <button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\">Save</button>\n                          <!--<!button type=\"submit\" class=\"btn btn-success\" style=\"width: 30%\" onclick=\"return validateForm()\">Save</button>-->\n                        </center>\n                        </div>\n                        \n                      </fieldset>\n                    </form>\n                  </div>\n                    <!--End of edit form-->\n        </div>\n        </div>\n        <!--End of first row-->\n\n        <!--second row-->\n        <div class=\"row\">\n          <br><br><hr><br><br><h2>Information</h2><br><br>\n        <!--information-->\n        \n        <div class=\"accordion\" id=\"accordionExample\" style=\"font-size:17px;\">\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne\">\n              <button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n                What is cat type? ประเภทของแมวคืออะไร?\n              </button>\n            </h2>\n            <div id=\"collapseOne\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                  <strong>Intact Adult</strong> แมวโตเต็มวัยที่ทำหมัน คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่ผ่านจะทำหมันแล้ว<br>\n                  <strong>Neutered Adult</strong> แมวโตเต็มวัยทั่วไป คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่ยังไม่ผ่านจะทำหมันแล้ว<br>\n                  <strong>Obese prone</strong> แมวโตเต็มวัยที่น้ำหนักเพิ่มง่าย คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่น้ำหนักเพิ่มขึ้นอย่างต่อเนื่องและผู้ใช้ต้องการควบคุมน้ำหนัก <br>\n                  <strong>Weight loss</strong> แมวโตเต็มวัยที่ต้องการลดน้ำหนัก คือ แมวในช่วงอายุ 12 เดือน - 7 ปี ที่มีน้ำหนักเกินเกณฑ์มาตรฐานหรือผู็ใช้ต้องการลดน้ำหนัก <br>\n                  <strong>Kitten</strong> ลูกแมว คือ แมวในช่วงอายุน้อยกว่า 12 เดือน<br>\n                </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingTwo\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseTwo\" aria-expanded=\"false\" aria-controls=\"collapseTwo\">\n                Schedule Update? การจัดการตารางมีอะไรบ้าง?\n              </button>\n            </h2>\n            <div id=\"collapseTwo\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingTwo\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                <strong>Old Schedule</strong>  คือ การเก็บตารางเดิมเอาไว้ ไม่มีการเปลี่ยนแปลงทั้งเวลาและปริมาณ แมวจะได้รับอาหารตารางที่วางเอาไว้เหมือนเดิมทุกประการ<br>\n                <strong>Update Schedule</strong>  คือ การเก็บเวลาการให้อาหารเดิมเอาไว้ แต่จะมีการเปลี่ยนปริมาณอาหารให้เหมาะสมกับลักษณะของแมวในปัจจุบัน แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>\n                <strong>Get New schedule</strong>  คือ การสร้างตารางเวลาให้อาหารใหม่ โดยคำนวนเวลาและปริมาณอาหารที่เหมาะสมตามค่าพลังงานขณะพัก หรือ RER แมวจะได้รับอาการตามตารางใหม่หลังจากกดอัพเดทข้อมูล<br>\n              </div>\n            </div>\n          </div>\n          <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingThree\">\n              <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseThree\" aria-expanded=\"false\" aria-controls=\"collapseThree\">\n                ฉันควรใส่อะไรลงไปในการแก้ไขข้อมูลแมวบ้าง?\n              </button>\n            </h2>\n            <div id=\"collapseThree\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingThree\" data-bs-parent=\"#accordionExample\">\n              <div class=\"accordion-body\">\n                ผู้ใช้ควรใส่น้ำหนักและประเภทของแมวให้ถูกต้องและบรรยายความเปลี่ยนแปลงที่เกินขึ้นกับแมวในช่วงเวลา 1-2 สัปดาห์ที่ผ่านมา\n              </div>\n            </div>\n          </div>\n        </div>\n        <!--End of information-->\n        </div>\n        <!--End of second row-->\n    </div>\n\n    {{{footer}}}\n</body>\n</html>\n",
         "output": "str",
         "x": 1130,
         "y": 400,
@@ -209,7 +209,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}\n\n\n.bg-modal {\n\tbackground-color: rgba(0, 0, 0, 0.7);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tz-index: 1;\n\ttop: 0;\n\tdisplay: none;\n\tjustify-content: center;\n\talign-items: center;\n}\n\n.modal-contents {\n\theight: 70%;\n\twidth: 60%;\n\tbackground-color: white;\n\ttext-align: center;\n\tpadding: 10px;\n\tposition: relative;\n\tz-index: 1;\n\n\n}\n\n.close {\n    position: absolute;\n    color: #444444;\n    top: 0px;\n    right: 14px;\n    font-size: 42px;\n    transform: rotate(45deg);\n    cursor: pointer;\n\n}}",
         "output": "str",
         "x": 750,
         "y": 400,
@@ -228,10 +228,11 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 70,
+        "x": 90,
         "y": 440,
         "wires": [
             [
+                "9fa05273f4246a4a",
                 "a66bd4d531b4b0c2"
             ]
         ]
@@ -261,7 +262,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "    <!--Cat information-->    \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"> <button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" /></button>\n\n                <span class=\"name mt-3\">{{name}}</span> <br><br>\n                <span class=\"idd\">Weight : {{weight}} kg</span>\n                <span class=\"idd\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br><br>\n                <div class=\" d-flex mt-2\"> <a href=\"/catedit\"><button class=\"btn1 btn-dark\">Edit Profile</button></a> </div>\n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <div class=\" px-2 rounded mt-4 date \"> <span class=\"join\">Last update {{date}}</span> </div> \n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    </div>\n    <!--End of Cat information-->\n",
+        "template": "<!--Cat information--> \n    <div class=\"column\">\n      {{#payload}}\n      <div class=\"container\" style=\"font-size:16px;\">\n        <div class=\"card p-4\">\n            <div class=\" image d-flex flex-column justify-content-center align-items-center\"><button class=\"rbtn btn-secondary\">\n                <img src=\"http://pngimg.com/uploads/cat/cat_PNG50514.png\" height=\"100\" width=\"100\" ></button>\n\n                <span class=\"name mt-3\" style=\"width:100%; text-align: center;\">{{name}}</span> <br>\n                <span class=\"idd\" style=\"font-size:16px;\">Weight : {{weight}} kg</span>\n                <span class=\"idd\" style=\"font-size:16px;\">type : {{type}} </span>\n                <div class=\"text mt-3\"> <span>{{des}} </span> </div>\n                <br>\n                </div>\n                \n                <div class=\"gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center\">                \n                <center><div class=\" card border-secondary mb-3 \"> <span class=\"join text-primary\">Last update {{date}}</span> </div> </center>\n              </div>\n            </div>\n        </div>\n        {{/payload}}\n    </div>\n    <!--End of Cat information-->",
         "output": "str",
         "x": 430,
         "y": 400,
@@ -333,7 +334,7 @@
         "syntax": "mustache",
         "template": "UPDATE catinfo set name = '{{payload.name}}', weight = '{{payload.weight}}', des = '{{payload.des}}', type = '{{payload.type}}', date='{{payload.date}}'",
         "output": "str",
-        "x": 260,
+        "x": 280,
         "y": 500,
         "wires": [
             [
@@ -434,7 +435,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>",
+        "template": "<!--nav-->\n<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n      <ul class=\"navbar-nav me-auto\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n        </li>\n      </ul>\n      <form class=\"d-flex\">\n        <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n        <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n      </form>\n    </div>\n    <button type=\"button\" id=\"button\" class=\"btn btn-secondary\" style=\"margin-left: 8px;\">?</button>\n  </div>\n</nav>\n<br><br>\n\n<!--Pop up info-->\n<div id=\"simpleModal\" class=\"bg-modal\">\n<div class=\"modal-contents\">\n<div class=\"close\">+</div>\n\n<center><p><h3> วิธีการใช้งาน </h3></p></center>\n  <div style=\"text-align: center;  border: 3px; position: absolute;  top: 30%;\">\n  <p>ผู้ใช้สามารถเข้าถึงหน้าเว็บเพจได้ 6 เว็บเพจ ได้แก่ หน้าหลัก, หน้าดูตารางให้อาหารแมว, หน้าติดตามมอนิเตอร์ และหน้าข้อมูลของแมวสัตว์เลี้ยง เรายังมีหน้าย่อยซึ่งเป็นส่วนเสริมในการแก้ไขข้อมูลแมวสัตว์เลี้ยง ซึ่งจะเข้าถึงได้จากหน้าดูข้อมูลแมวเท่านั้น </p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขตารางการให้อาหาร เช่น การลบเวลาให้อาหาร การเพิ่มเวลาให้อาหารได้ในหน้าดูตารางให้อาหารแมว(/schedule)</p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขข้อมูลของแมว เช่น น้ำหนัก ประเภท รวมทั้งคำนวนตารางอาหารได้ใหม่ ในหน้าแก้ไขข้อมูลของแมว(/catedit)</p><br><br>\n  </div>\n</div>\n</div>\n\n<!--pop up script-->\n<script>\ndocument.getElementById('button').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"flex\";});\n\ndocument.querySelector('.close').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"none\";});\n</script>",
         "output": "str",
         "x": 1030,
         "y": 220,
@@ -453,7 +454,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>",
+        "template": "<!--nav-->\n<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n      <ul class=\"navbar-nav me-auto\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n        </li>\n      </ul>\n      <form class=\"d-flex\">\n        <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n        <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n      </form>\n    </div>\n    <button type=\"button\" id=\"button\" class=\"btn btn-secondary\" style=\"margin-left: 8px;\">?</button>\n  </div>\n</nav>\n<br><br>\n\n<!--Pop up info-->\n<div id=\"simpleModal\" class=\"bg-modal\">\n<div class=\"modal-contents\">\n<div class=\"close\">+</div>\n\n<center><p><h3> วิธีการใช้งาน </h3></p></center>\n  <div style=\"text-align: center;  border: 3px; position: absolute;  top: 30%;\">\n  <p>ผู้ใช้สามารถเข้าถึงหน้าเว็บเพจได้ 6 เว็บเพจ ได้แก่ หน้าหลัก, หน้าดูตารางให้อาหารแมว, หน้าติดตามมอนิเตอร์ และหน้าข้อมูลของแมวสัตว์เลี้ยง เรายังมีหน้าย่อยซึ่งเป็นส่วนเสริมในการแก้ไขข้อมูลแมวสัตว์เลี้ยง ซึ่งจะเข้าถึงได้จากหน้าดูข้อมูลแมวเท่านั้น </p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขตารางการให้อาหาร เช่น การลบเวลาให้อาหาร การเพิ่มเวลาให้อาหารได้ในหน้าดูตารางให้อาหารแมว(/schedule)</p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขข้อมูลของแมว เช่น น้ำหนัก ประเภท รวมทั้งคำนวนตารางอาหารได้ใหม่ ในหน้าแก้ไขข้อมูลของแมว(/catedit)</p><br><br>\n  </div>\n</div>\n</div>\n\n<!--pop up script-->\n<script>\ndocument.getElementById('button').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"flex\";});\n\ndocument.querySelector('.close').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"none\";});\n</script>",
         "output": "str",
         "x": 990,
         "y": 400,
@@ -469,7 +470,7 @@
         "z": "5b0dd51dc5548102",
         "name": "keep schedule",
         "info": "",
-        "x": 200,
+        "x": 1390,
         "y": 460,
         "wires": []
     },
@@ -479,7 +480,7 @@
         "z": "5b0dd51dc5548102",
         "name": "update schedule",
         "info": "",
-        "x": 1100,
+        "x": 1140,
         "y": 580,
         "wires": []
     },
@@ -596,6 +597,13 @@
                 "pt": "msg",
                 "to": "payload.sche",
                 "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "amount",
+                "pt": "msg",
+                "to": "payload.amount",
+                "tot": "msg"
             }
         ],
         "action": "",
@@ -622,7 +630,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 860,
+        "x": 840,
         "y": 620,
         "wires": [
             [
@@ -717,12 +725,17 @@
                 "vt": "str"
             },
             {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
                 "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
+        "outputs": 3,
         "x": 930,
         "y": 700,
         "wires": [
@@ -731,6 +744,9 @@
             ],
             [
                 "930e580cf343c17a"
+            ],
+            [
+                "2fa1760e2932118a"
             ]
         ]
     },
@@ -780,7 +796,7 @@
         "syntax": "mustache",
         "template": "INSERT INTO schedule VALUES ('{{{time}}}', '{{amount}}', '{{des}}',0);",
         "output": "str",
-        "x": 1620,
+        "x": 1640,
         "y": 740,
         "wires": [
             [
@@ -793,7 +809,7 @@
         "type": "function",
         "z": "5b0dd51dc5548102",
         "name": "add table",
-        "func": "var RER=msg.RER;\nglobal.set(\"schecount\",3);\n\nmsg.time=\"07:00\"\nmsg.amount=(0.2*RER).toFixed(2);\nmsg.des=\"morning feeding\"\nmsg.count=0;\nnode.send(msg);\n\nmsg.time=\"12:00\"\nmsg.amount=(0.3*RER).toFixed(2);\nmsg.des=\"afternoon feeding\"\nmsg.count=1;\nnode.send(msg);\n\nmsg.time=\"17:00\"\nmsg.amount=(0.3*RER).toFixed(2);\nmsg.des=\"evening feeding\"\nmsg.count=2;\nnode.send(msg);\n\nmsg.time=\"22:00\"\nmsg.amount=(0.2*RER).toFixed(2);\nmsg.des=\"night feeding\"\nmsg.count=3;\nnode.send(msg);",
+        "func": "//find number of feeding per day\n//var CPG=msg.CpG.toFixed(2);\nvar RER=msg.RER.toFixed(2);\nvar count = RER/30;\ncount = Math.floor((count+1)/2)*2;\nif (count <= 4){count=4;}\nif (count >= 16){count =16;}\nglobal.set(\"schecount\",count);\nvar RER_P = RER/count;\n\nfunction get_time(t){\n    var str=t.toString();\n    if(str.length==1){t=\"0\"+t}\n    return t;\n}\n\nfunction Half_Day(h,m,ct){\n    var step = 600/((count/2)-1);\n\n    msg.time= get_time(h) + \":\" + get_time(m);\n    msg.amount=(RER_P).toFixed(2);\n    msg.des=\"feeding no.\" + (1+ct).toString();\n    msg.count=1;\n    node.send(msg);\n\n    for (let i = 2; i <= (count/2) ; i++) {\n        m+=step;\n        h+=Math.floor(m/60);\n        m=Math.floor(m%60);\n        msg.time= get_time(h) + \":\" + get_time(m);\n        msg.amount=(RER_P).toFixed(2);\n        msg.des=\"feeding no.\" + (i+ct).toString();\n        msg.count=i;\n        node.send(msg);\n    }\n}\n\nHalf_Day(1,0,0)\nHalf_Day(13,0,count/2)",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -804,51 +820,6 @@
         "wires": [
             [
                 "257a97dddba54b9a"
-            ]
-        ]
-    },
-    {
-        "id": "e124bfa40604b623",
-        "type": "inject",
-        "z": "5b0dd51dc5548102",
-        "name": "",
-        "props": [
-            {
-                "p": "payload.name",
-                "v": "hill",
-                "vt": "str"
-            },
-            {
-                "p": "payload.weight",
-                "v": "5.5",
-                "vt": "str"
-            },
-            {
-                "p": "payload.type",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "p": "payload.sche",
-                "v": "2",
-                "vt": "str"
-            },
-            {
-                "p": "payload.des",
-                "v": "hello world",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1510,
-        "y": 560,
-        "wires": [
-            [
-                "cd9fe468fd8fc6b8"
             ]
         ]
     },
@@ -903,7 +874,7 @@
         "y": 500,
         "wires": [
             [
-                "fed5d186c329f834"
+                "830434d6eb9f61e1"
             ]
         ]
     },
@@ -958,8 +929,7 @@
         "y": 620,
         "wires": [
             [
-                "fed5d186c329f834",
-                "0dc21847ffefc6a4"
+                "830434d6eb9f61e1"
             ]
         ]
     },
@@ -1033,23 +1003,6 @@
         ]
     },
     {
-        "id": "0dc21847ffefc6a4",
-        "type": "debug",
-        "z": "5b0dd51dc5548102",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2410,
-        "y": 700,
-        "wires": []
-    },
-    {
         "id": "457a0e8c2ade013f",
         "type": "change",
         "z": "5b0dd51dc5548102",
@@ -1111,11 +1064,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2200,
+        "x": 2160,
         "y": 740,
         "wires": [
             [
-                "fed5d186c329f834"
+                "830434d6eb9f61e1"
             ]
         ]
     },
@@ -1149,17 +1102,22 @@
             },
             {
                 "p": "payload.weight",
-                "v": "3.6",
+                "v": "5.6",
                 "vt": "str"
             },
             {
                 "p": "payload.type",
-                "v": "5",
+                "v": "1",
                 "vt": "str"
             },
             {
                 "p": "payload.des",
                 "v": "ploto is a little black cat. he like to eat a little of cat snack after meal.",
+                "vt": "str"
+            },
+            {
+                "p": "payload.sche",
+                "v": "3",
                 "vt": "str"
             }
         ],
@@ -1168,8 +1126,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 80,
-        "y": 640,
+        "x": 1600,
+        "y": 540,
         "wires": [
             [
                 "a66bd4d531b4b0c2"
@@ -1193,6 +1151,248 @@
             [
                 "cd9fe468fd8fc6b8"
             ]
+        ]
+    },
+    {
+        "id": "bb6c4815a62853af",
+        "type": "comment",
+        "z": "5b0dd51dc5548102",
+        "name": "get only one",
+        "info": "",
+        "x": 1130,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "daad8a1ed9fae0ca",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 1290,
+        "y": 880,
+        "wires": [
+            [
+                "5b7bfd7e8d480e4a"
+            ]
+        ]
+    },
+    {
+        "id": "2fa1760e2932118a",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "DELETE FROM schedule;",
+        "output": "str",
+        "x": 1120,
+        "y": 880,
+        "wires": [
+            [
+                "daad8a1ed9fae0ca"
+            ]
+        ]
+    },
+    {
+        "id": "5b7bfd7e8d480e4a",
+        "type": "function",
+        "z": "5b0dd51dc5548102",
+        "name": "one table",
+        "func": "var RER=msg.RER.toFixed(2);\nvar count = RER/30;\n\ncount = Math.floor((count+1)/2)*2;\nif (count <= 4){count=4;}\nif (count >= 16){count =16;}\n\nglobal.set(\"schecount\",count);\n\nmsg.count=count;\nnode.send(msg);\n\n/*\nmsg.time=\"22:00\"\nmsg.amount=(0.2*RER).toFixed(2);\nmsg.des=\"night feeding\"\nmsg.count=count;\nnode.send(msg);\n*/",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 880,
+        "wires": [
+            [
+                "e1b7c936f77aa932"
+            ]
+        ]
+    },
+    {
+        "id": "e1b7c936f77aa932",
+        "type": "template",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO schedule VALUES ('{{{time}}}', '{{amount}}', '{{des}}',0);",
+        "output": "str",
+        "x": 1620,
+        "y": 880,
+        "wires": [
+            [
+                "09b64d04cd55c008"
+            ]
+        ]
+    },
+    {
+        "id": "09b64d04cd55c008",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 1790,
+        "y": 880,
+        "wires": [
+            [
+                "cd4f3acc9e115412"
+            ]
+        ]
+    },
+    {
+        "id": "cd4f3acc9e115412",
+        "type": "change",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "time",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "amount",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "des",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "count",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1980,
+        "y": 880,
+        "wires": [
+            [
+                "830434d6eb9f61e1"
+            ]
+        ]
+    },
+    {
+        "id": "c3091c18e4dfa41e",
+        "type": "debug",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "9fa05273f4246a4a",
+        "type": "debug",
+        "z": "5b0dd51dc5548102",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 270,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "830434d6eb9f61e1",
+        "type": "sqlite",
+        "z": "5b0dd51dc5548102",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT name,type,weight,des,date FROM catinfo;",
+        "name": "info DB",
+        "x": 2420,
+        "y": 500,
+        "wires": [
+            [
+                "e658ad231bd26a2e"
+            ]
+        ]
+    },
+    {
+        "id": "4b1f5d9cb6c7ee39",
+        "type": "inject",
+        "z": "5b0dd51dc5548102",
+        "name": "init name",
+        "props": [
+            {
+                "p": "payload.name",
+                "v": "pluto",
+                "vt": "str"
+            },
+            {
+                "p": "payload.weight",
+                "v": "5.3",
+                "vt": "str"
+            },
+            {
+                "p": "payload.type",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "p": "payload.des",
+                "v": "ploto is a little black cat. he like to eat a little of cat snack after meal.",
+                "vt": "str"
+            },
+            {
+                "p": "payload.sche",
+                "v": "4",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1360,
+        "y": 960,
+        "wires": [
+            []
         ]
     },
     {

@@ -62,6 +62,8 @@ for (let i = 0; i < msg.payload.length; i++) {
 
 //add table
 var RER=msg.RER;
+var count = RER/30;
+
 global.set("schecount",3);
 
 msg.time="07:00"

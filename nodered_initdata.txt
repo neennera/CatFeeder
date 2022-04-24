@@ -39,7 +39,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "CREATE TABLE schedule (time,amount,des)",
+        "topic": "CREATE TABLE schedule (time,amount,des,status)",
         "payloadType": "date",
         "x": 270,
         "y": 100,
@@ -64,7 +64,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "DROP TABLE schedule",
+        "topic": "DROP TABLE schedule;",
         "x": 260,
         "y": 200,
         "wires": [
@@ -135,7 +135,7 @@
         "id": "11bb256b5664c9b5",
         "type": "inject",
         "z": "881fccab3e62d201",
-        "name": "morning feed",
+        "name": "schedule setup",
         "props": [
             {
                 "p": "payload.time",
@@ -158,46 +158,12 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 150,
-        "y": 540,
+        "x": 200,
+        "y": 580,
         "wires": [
             [
-                "0546fa215ee2ca51",
-                "f4772959d64c8b2c"
+                "30f735b90aee26db"
             ]
-        ]
-    },
-    {
-        "id": "0546fa215ee2ca51",
-        "type": "template",
-        "z": "881fccab3e62d201",
-        "name": "",
-        "field": "topic",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "INSERT INTO schedule VALUES ('{{payload.time}}', '{{payload.amount}}', '{{payload.des}}');",
-        "output": "str",
-        "x": 340,
-        "y": 420,
-        "wires": [
-            [
-                "647b45af43cd7383"
-            ]
-        ]
-    },
-    {
-        "id": "647b45af43cd7383",
-        "type": "sqlite",
-        "z": "881fccab3e62d201",
-        "mydb": "f3abeba3c0ca293c",
-        "sqlquery": "msg.topic",
-        "sql": "SELECT * FROM schedule",
-        "name": "DB",
-        "x": 510,
-        "y": 420,
-        "wires": [
-            []
         ]
     },
     {
@@ -209,11 +175,12 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
-        "y": 540,
+        "x": 1070,
+        "y": 640,
         "wires": []
     },
     {
@@ -348,8 +315,8 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "demo_db",
-        "x": 1020,
-        "y": 520,
+        "x": 880,
+        "y": 420,
         "wires": [
             []
         ]
@@ -367,15 +334,15 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 980,
-        "y": 600,
+        "x": 840,
+        "y": 500,
         "wires": []
     },
     {
         "id": "16b59504e7bd1d75",
         "type": "inject",
         "z": "881fccab3e62d201",
-        "name": "morning feed",
+        "name": "catinfo setup",
         "props": [
             {
                 "p": "payload.name",
@@ -403,8 +370,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 330,
-        "y": 600,
+        "x": 190,
+        "y": 500,
         "wires": [
             [
                 "2394c4350838591f"
@@ -430,8 +397,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 580,
-        "y": 600,
+        "x": 440,
+        "y": 500,
         "wires": [
             [
                 "b3033c048b1e09bc"
@@ -449,13 +416,101 @@
         "syntax": "mustache",
         "template": "INSERT INTO catinfo VALUES ('{{payload.name}}', '{{payload.weight}}', '{{payload.type}}', '{{payload.des}}','{{payload.date}}');",
         "output": "str",
-        "x": 800,
-        "y": 600,
+        "x": 660,
+        "y": 500,
         "wires": [
             [
                 "31fea4a7756c4341",
                 "524fb2e990857cfb"
             ]
+        ]
+    },
+    {
+        "id": "30f735b90aee26db",
+        "type": "template",
+        "z": "881fccab3e62d201",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "DELETE FROM schedule;",
+        "output": "str",
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "0ddaaf8a82d14a0d"
+            ]
+        ]
+    },
+    {
+        "id": "0ddaaf8a82d14a0d",
+        "type": "sqlite",
+        "z": "881fccab3e62d201",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "e1209590e34aa172"
+            ]
+        ]
+    },
+    {
+        "id": "98612766d9a0a240",
+        "type": "template",
+        "z": "881fccab3e62d201",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO schedule VALUES ('{{{time}}}', '{{amount}}', '{{des}}',0);",
+        "output": "str",
+        "x": 960,
+        "y": 580,
+        "wires": [
+            [
+                "1f81659f1d164204",
+                "f4772959d64c8b2c"
+            ]
+        ]
+    },
+    {
+        "id": "e1209590e34aa172",
+        "type": "function",
+        "z": "881fccab3e62d201",
+        "name": "add table",
+        "func": "var RER=1200;\nglobal.set(\"schecount\",3);\n\nmsg.time=\"07:00\"\nmsg.amount=(0.2*RER).toFixed(2);\nmsg.des=\"morning feeding\"\nmsg.count=0;\nnode.send(msg);\n\nmsg.time=\"12:00\"\nmsg.amount=(0.3*RER).toFixed(2);\nmsg.des=\"afternoon feeding\"\nmsg.count=1;\nnode.send(msg);\n\nmsg.time=\"17:00\"\nmsg.amount=(0.3*RER).toFixed(2);\nmsg.des=\"evening feeding\"\nmsg.count=2;\nnode.send(msg);\n\nmsg.time=\"22:00\"\nmsg.amount=(0.2*RER).toFixed(2);\nmsg.des=\"night feeding\"\nmsg.count=3;\nnode.send(msg);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 580,
+        "wires": [
+            [
+                "98612766d9a0a240"
+            ]
+        ]
+    },
+    {
+        "id": "1f81659f1d164204",
+        "type": "sqlite",
+        "z": "881fccab3e62d201",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT * FROM schedule",
+        "name": "DB",
+        "x": 1130,
+        "y": 580,
+        "wires": [
+            []
         ]
     },
     {
