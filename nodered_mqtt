@@ -21,8 +21,8 @@
         "correl": "",
         "expiry": "",
         "broker": "7cf2ed1e5a6a59be",
-        "x": 940,
-        "y": 500,
+        "x": 1260,
+        "y": 540,
         "wires": []
     },
     {
@@ -90,7 +90,7 @@
         "y": 340,
         "wires": [
             [
-                "5b2d28ba133c832d"
+                "44fd391ecb32708d"
             ]
         ]
     },
@@ -134,7 +134,7 @@
         "type": "function",
         "z": "d471602836679556",
         "name": "timestamp",
-        "func": "var t = \"12\"+\":\"+\"00\";\n\nmsg.timestamp= t;\nreturn msg;",
+        "func": "var t = \"13\"+\":\"+\"00\";\n\nmsg.timestamp= t;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -145,25 +145,6 @@
         "wires": [
             [
                 "ab55aa286822c59b"
-            ]
-        ]
-    },
-    {
-        "id": "5b2d28ba133c832d",
-        "type": "function",
-        "z": "d471602836679556",
-        "name": "",
-        "func": "msg.payload = msg.time + ','+ parseFloat(msg.amount);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 440,
-        "y": 500,
-        "wires": [
-            [
-                "5dac595be92ca6a3"
             ]
         ]
     },
@@ -187,6 +168,16 @@
                 "t": "delete",
                 "p": "des",
                 "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "status",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
             }
         ],
         "action": "",
@@ -194,12 +185,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
-        "y": 500,
+        "x": 1040,
+        "y": 440,
         "wires": [
             [
-                "72fe87e0f3fb9f95",
-                "6ab5057d8fc4585f"
+                "e5a03c12796be979"
             ]
         ]
     },
@@ -220,7 +210,8 @@
         "y": 640,
         "wires": [
             [
-                "ee25bcc1bd3c7fee"
+                "ee25bcc1bd3c7fee",
+                "51d14713ad4bee6d"
             ]
         ]
     },
@@ -348,50 +339,6 @@
         "wires": []
     },
     {
-        "id": "441a8938e81815de",
-        "type": "function",
-        "z": "d471602836679556",
-        "name": "timestamp",
-        "func": "\nmsg.payload= Math.floor(Math.random()*100000)%200;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 710,
-        "y": 440,
-        "wires": [
-            [
-                "72fe87e0f3fb9f95"
-            ]
-        ]
-    },
-    {
-        "id": "08c25314d6a6409e",
-        "type": "inject",
-        "z": "d471602836679556",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "154.5",
-        "payloadType": "str",
-        "x": 570,
-        "y": 440,
-        "wires": [
-            [
-                "441a8938e81815de"
-            ]
-        ]
-    },
-    {
         "id": "5f4e325bc5518d5f",
         "type": "sqlite",
         "z": "d471602836679556",
@@ -458,35 +405,6 @@
         "wires": []
     },
     {
-        "id": "a2f84f563b2072f4",
-        "type": "inject",
-        "z": "d471602836679556",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "12:00,1.00",
-        "payloadType": "str",
-        "x": 680,
-        "y": 540,
-        "wires": [
-            [
-                "72fe87e0f3fb9f95"
-            ]
-        ]
-    },
-    {
         "id": "99d049d605e8e44f",
         "type": "inject",
         "z": "d471602836679556",
@@ -516,7 +434,23 @@
         ]
     },
     {
-        "id": "6ab5057d8fc4585f",
+        "id": "44fd391ecb32708d",
+        "type": "sqlite",
+        "z": "d471602836679556",
+        "mydb": "c9fd59362167d331",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM catinfo;",
+        "name": "SELECT",
+        "x": 740,
+        "y": 440,
+        "wires": [
+            [
+                "6e479784806ad3c9"
+            ]
+        ]
+    },
+    {
+        "id": "b66970c8250bf88c",
         "type": "debug",
         "z": "d471602836679556",
         "name": "",
@@ -524,12 +458,77 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 560,
+        "x": 1110,
+        "y": 620,
         "wires": []
+    },
+    {
+        "id": "e5a03c12796be979",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "",
+        "func": "msg.payload=msg.cmd;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 540,
+        "wires": [
+            [
+                "9c538c300f7994da"
+            ]
+        ]
+    },
+    {
+        "id": "6e479784806ad3c9",
+        "type": "function",
+        "z": "d471602836679556",
+        "name": "",
+        "func": "msg.amount = parseFloat(msg.amount)/parseFloat(msg.payload[0].CPG);\nmsg.amount = msg.amount.toFixed(2);\nmsg.cmd = msg.time + ','+ parseFloat(msg.amount);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 440,
+        "wires": [
+            [
+                "5dac595be92ca6a3"
+            ]
+        ]
+    },
+    {
+        "id": "9c538c300f7994da",
+        "type": "change",
+        "z": "d471602836679556",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "cmd",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 540,
+        "wires": [
+            [
+                "72fe87e0f3fb9f95",
+                "b66970c8250bf88c"
+            ]
+        ]
     },
     {
         "id": "7cf2ed1e5a6a59be",

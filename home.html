@@ -62,18 +62,57 @@
         </tbody>
       </table>
 
-      
+      <style>
+        .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 15px;
+          border-radius: 5px;  
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%; 
+          background: #04AA6D;
+          cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          background: #04AA6D;
+          cursor: pointer;
+        }
+        </style>
+      <form method="POST" action="/home" name="ManualForm"> <!--onsubmit="return validateForm()" name="CatEditForm"-->
+        <fieldset>
       <div class="card border-secondary mb-3" style="width: 100%;">
         <div class="card-body">
-          <p style="color:green;font-size: larger;">GREEN mean feeding successfully</p>        
-          <p style="color:red;font-size: larger;">RED mean feeding fail</p>
-          <p style="color:rgb(0, 140, 255);font-size: larger;">BLUE mean up comming</p>
+          <h4 align="center">Manual  Feeding</h4><br>
+          <div align="center">
+            <input class="slider" id="amount" name="amount" type="range" min="1" max="15" value="" oninput="this.nextElementSibling.value = this.value">
+            Manual Feedeing for <output>7</output> Gram
+          </div>
+         
+              
           <hr>
-          <p class="mb-0">The feeding schedule can be changed in <a href="/schedule">"Schedule"</a> page, but the feeding that has been made today cannot be changed.</p>
-
+          <p class="mb-0">This command only action once. The feeding schedule can be changed in <a href="/schedule">"Schedule"</a> page</p>
+          <br><center><button type="submit" class="btn btn-success" style="width:30%">FEED</button></center>
         </div>
       </div>
+      </fieldset>
+      </form>
     </div>
+
     </div>
     <!--End of Cat schedule-->
 
