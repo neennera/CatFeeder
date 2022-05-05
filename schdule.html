@@ -21,7 +21,8 @@
     <div class="container-fluid maxWidth">
     <div>
         <center><h2>schedule</h2></center>
-
+      <form method="POST" action="/schedule"  name="CatDeleteForm"> <!--onsubmit="return validateForm()" name="CatEditForm"-->
+        <fieldset>
     <table class="table table-hover">
         <thead>
           <tr>
@@ -42,17 +43,31 @@
             <td scope="row">{{des}}</td>
             <!--<td scope="row"><span class="badge bg-success">Success</span></td>-->
             <td scope="row">{{status}}</td>
-            <td scope="row"><a href="/schedule/delete/{{rowid}}"><button class="btn btn-warning">Delete</button></a></td>
+            <!--td scope="row"><a href="/schedule/delete/"><button class="btn btn-warning">Delete</button></a></td-->
+            
+            <td scope="row"><button type="submit" id="id" name="id" value={{rowid}} class="btn btn-warning">Delete</button></td>
           </tr>
         <!--/tr-->
           {{/payload}}
         </tbody>
       </table>
+    </fieldset>
+    </form>
     </div>
     <br><br>
     <div class="smallWidth">
     <h3>Add more schedule</h3>
-    <form method="POST" action="/schedule"> <!--action to post of /schedule-->
+
+    <script>
+      function validateForm() {
+        let x = document.forms["CatEditForm"]["amount"].value;
+        var w=parseFloat(x).toFixed(0)
+        if (w<=0 || w>15) { alert("Weight Item must be in range 1-15 gram"); return false; }
+        return true;
+      }
+    </script>
+
+    <form method="POST" action="/schedule" name="CatEditForm" onsubmit="return validateForm()"> <!--action to post of /schedule-->
       <fieldset>
         <div class="form-group">
             <label for="time" class="form-label mt-4" style="font-weight: bold;">Time to feed</label>
@@ -72,7 +87,7 @@
         <div class="form-group">
         <center>
           <!--submit button-->
-          <button type="submit" class="btn btn-success">Add</button>
+          <button type="submit" class="btn btn-success" id="id" name="id" value="-1">Add</button>
         </center>
         </div>
       </fieldset>

@@ -16,7 +16,7 @@
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>schedule</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <!--link rel=\"stylesheet\" href=\"style.css\"-->\n    <style>\n      {{{style}}}\n      </style>\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n\n    \n    {{{nav}}}\n    <div class=\"container-fluid maxWidth\">\n    <div>\n        <center><h2>schedule</h2></center>\n\n    <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Status</th>\n            <th scope=\"col\">Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          {{#payload}}\n        <!--tr class=\"table-active\"-->\n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n            <!--<td scope=\"row\"><span class=\"badge bg-success\">Success</span></td>-->\n            <td scope=\"row\">{{status}}</td>\n            <td scope=\"row\"><a href=\"/schedule/delete/{{rowid}}\"><button class=\"btn btn-warning\">Delete</button></a></td>\n          </tr>\n        <!--/tr-->\n          {{/payload}}\n        </tbody>\n      </table>\n    </div>\n    <br><br>\n    <div class=\"smallWidth\">\n    <h3>Add more schedule</h3>\n    <form method=\"POST\" action=\"/schedule\"> <!--action to post of /schedule-->\n      <fieldset>\n        <div class=\"form-group\">\n            <label for=\"time\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Time to feed</label>\n            <input type=\"time\" class=\"form-control\" id=\"time\" name=\"time\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 07:00 AM, 09:25 PM, 02:45 PM</small>\n         </div>\n        <div class=\"form-group\">\n            <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Amount of food</label>\n            <!--input type=\"int\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Enter amount of food\"-->\n            <input class=\"form-control\" id=\"amount\" name=\"amount\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 100, 175, 250 (gram)</small>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n          <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n        </div>\n        <div class=\"form-group\">\n        <center>\n          <!--submit button-->\n          <button type=\"submit\" class=\"btn btn-success\">Add</button>\n        </center>\n        </div>\n      </fieldset>\n    </form>\n    </div>\n    </div>\n    {{{footer}}}\n</body>\n</html>\n",
+        "template": "<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>schedule</title>\n    \n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css\" integrity=\"sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX\" crossorigin=\"anonymous\">\n    <!--link rel=\"stylesheet\" href=\"style.css\"-->\n    <style>\n      {{{style}}}\n      </style>\n</head>\n\n<body>\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>\n\n    \n    {{{nav}}}\n    <div class=\"container-fluid maxWidth\">\n    <div>\n        <center><h2>schedule</h2></center>\n      <form method=\"POST\" action=\"/schedule\"  name=\"CatDeleteForm\"> <!--onsubmit=\"return validateForm()\" name=\"CatEditForm\"-->\n        <fieldset>\n    <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">Time</th>\n            <th scope=\"col\">Amount of food</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Status</th>\n            <th scope=\"col\">Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <!--display value of payload-->\n          {{#payload}}\n        <!--tr class=\"table-active\"-->\n          <tr class=\"table-light\">\n            <td scope=\"row\">{{time}}</td>\n            <td scope=\"row\">{{amount}}</td>\n            <td scope=\"row\">{{des}}</td>\n            <!--<td scope=\"row\"><span class=\"badge bg-success\">Success</span></td>-->\n            <td scope=\"row\">{{status}}</td>\n            <!--td scope=\"row\"><a href=\"/schedule/delete/\"><button class=\"btn btn-warning\">Delete</button></a></td-->\n            \n            <td scope=\"row\"><button type=\"submit\" id=\"id\" name=\"id\" value={{rowid}} class=\"btn btn-warning\">Delete</button></td>\n          </tr>\n        <!--/tr-->\n          {{/payload}}\n        </tbody>\n      </table>\n    </fieldset>\n    </form>\n    </div>\n    <br><br>\n    <div class=\"smallWidth\">\n    <h3>Add more schedule</h3>\n\n    <script>\n      function validateForm() {\n        let x = document.forms[\"CatEditForm\"][\"amount\"].value;\n        var w=parseFloat(x).toFixed(0)\n        if (w<=0 || w>15) { alert(\"Weight Item must be in range 1-15 gram\"); return false; }\n        return true;\n      }\n    </script>\n\n    <form method=\"POST\" action=\"/schedule\" name=\"CatEditForm\" onsubmit=\"return validateForm()\"> <!--action to post of /schedule-->\n      <fieldset>\n        <div class=\"form-group\">\n            <label for=\"time\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Time to feed</label>\n            <input type=\"time\" class=\"form-control\" id=\"time\" name=\"time\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 07:00 AM, 09:25 PM, 02:45 PM</small>\n         </div>\n        <div class=\"form-group\">\n            <label for=\"mount\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Amount of food</label>\n            <!--input type=\"int\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Enter amount of food\"-->\n            <input class=\"form-control\" id=\"amount\" name=\"amount\">\n            <small id=\"emailHelp\" class=\"form-text text-muted\">Example : 100, 175, 250 (gram)</small>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"des\" class=\"form-label mt-4\" style=\"font-weight: bold;\">Description</label>\n          <input type=\"text\" class=\"form-control\" id=\"des\" name=\"des\">\n        </div>\n        <div class=\"form-group\">\n        <center>\n          <!--submit button-->\n          <button type=\"submit\" class=\"btn btn-success\" id=\"id\" name=\"id\" value=\"-1\">Add</button>\n        </center>\n        </div>\n      </fieldset>\n    </form>\n    </div>\n    </div>\n    {{{footer}}}\n</body>\n</html>\n",
         "output": "str",
         "x": 890,
         "y": 280,
@@ -63,12 +63,11 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
+        "x": 80,
         "y": 380,
         "wires": [
             [
-                "bcbfaee9ef830ef5",
-                "8d5fd373bc078603"
+                "2ce0f42f35c9ed1d"
             ]
         ]
     },
@@ -83,7 +82,7 @@
         "syntax": "mustache",
         "template": "INSERT INTO schedule VALUES ('{{payload.get.time}}', '{{payload.get.amount}}', '{{payload.get.des}}',0);",
         "output": "str",
-        "x": 800,
+        "x": 820,
         "y": 500,
         "wires": [
             [
@@ -99,8 +98,8 @@
         "sqlquery": "msg.topic",
         "sql": "SELECT * FROM schedule",
         "name": "DB",
-        "x": 1030,
-        "y": 380,
+        "x": 1010,
+        "y": 360,
         "wires": [
             [
                 "2e437bbbaac2441d"
@@ -113,16 +112,13 @@
         "z": "26945d84c9cd3d13",
         "name": "Delete:schedule",
         "url": "/schedule/delete/:rowid",
-        "method": "get",
+        "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 160,
-        "y": 860,
+        "x": 120,
+        "y": 680,
         "wires": [
-            [
-                "295c99da8891f455",
-                "32df637ec571be6b"
-            ]
+            []
         ]
     },
     {
@@ -134,10 +130,10 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "DELETE FROM schedule WHERE rowid = {{req.params.rowid}}",
+        "template": "DELETE FROM schedule WHERE rowid = {{payload.id}}",
         "output": "str",
-        "x": 620,
-        "y": 860,
+        "x": 400,
+        "y": 640,
         "wires": [
             [
                 "d20e8ecf85c4d646"
@@ -153,39 +149,6 @@
         "x": 100,
         "y": 220,
         "wires": []
-    },
-    {
-        "id": "96760b1d0d3f037f",
-        "type": "switch",
-        "z": "26945d84c9cd3d13",
-        "name": "",
-        "property": "payload.get.time",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "regex",
-                "v": "check",
-                "vt": "msg",
-                "case": true
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 550,
-        "y": 600,
-        "wires": [
-            [
-                "b345dfacf3778c3a",
-                "ad55df0f16e83828"
-            ],
-            [
-                "596e7dd140203d56"
-            ]
-        ]
     },
     {
         "id": "2e437bbbaac2441d",
@@ -232,7 +195,7 @@
         "type": "debug",
         "z": "26945d84c9cd3d13",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -260,7 +223,7 @@
         "z": "26945d84c9cd3d13",
         "name": "case 2",
         "info": "case no schedule in this time before",
-        "x": 730,
+        "x": 810,
         "y": 460,
         "wires": []
     },
@@ -270,7 +233,7 @@
         "z": "26945d84c9cd3d13",
         "name": "case 1",
         "info": "case we have schedule in this time before",
-        "x": 730,
+        "x": 810,
         "y": 540,
         "wires": []
     },
@@ -316,7 +279,7 @@
         "sqlquery": "fixed",
         "sql": "SELECT DISTINCT time FROM schedule;",
         "name": "SELECT",
-        "x": 340,
+        "x": 380,
         "y": 380,
         "wires": [
             [
@@ -448,6 +411,11 @@
                 "p": "payload.des",
                 "v": "morning feeding",
                 "vt": "str"
+            },
+            {
+                "p": "payload.id",
+                "v": "-1",
+                "vt": "str"
             }
         ],
         "repeat": "",
@@ -459,8 +427,7 @@
         "y": 460,
         "wires": [
             [
-                "bcbfaee9ef830ef5",
-                "8d5fd373bc078603"
+                "2ce0f42f35c9ed1d"
             ]
         ]
     },
@@ -479,7 +446,8 @@
         "y": 480,
         "wires": [
             [
-                "d20e8ecf85c4d646"
+                "d20e8ecf85c4d646",
+                "e9f187cd64245c03"
             ]
         ]
     },
@@ -595,6 +563,13 @@
             },
             {
                 "t": "set",
+                "p": "id",
+                "pt": "msg",
+                "to": "payload.get.id",
+                "tot": "str"
+            },
+            {
+                "t": "set",
                 "p": "time",
                 "pt": "msg",
                 "to": "payload.get.time",
@@ -616,7 +591,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 810,
+        "x": 830,
         "y": 580,
         "wires": [
             [
@@ -648,7 +623,7 @@
         "y": 460,
         "wires": [
             [
-                "96760b1d0d3f037f"
+                "ac1578cd8a6b5c4b"
             ]
         ]
     },
@@ -671,7 +646,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 350,
+        "x": 390,
         "y": 460,
         "wires": [
             [
@@ -732,7 +707,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}",
+        "template": ".maxWidth{\n    max-width:80%;\n    }\n.smallWidth{\n    max-width:40%;\n    margin-left: auto; \n    margin-right: 5%;\n    }\n\n.column{\n    float: center;\n    width: 50%;  \n    \n}\n      \n\n.row:after{\n    content: \"\";\n    display: table;\n    clear: both;\n}\n\n    * {\n    margin: 0;\n    padding: 0\n}\n\n\n.card {\n    width: 350px;\n    background-color: #efefef;\n    border: none;\n    cursor: pointer;\n    transition: all 0.5s\n}\n\n.image img {\n    transition: all 0.5s\n}\n\n.card:hover .image img {\n    transform: scale(1.5)\n}\n\n.rbtn {\n    height: 140px;\n    width: 140px;\n    border-radius: 50%\n}\n\n.name {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.idd {\n    font-size: 14px;\n    font-weight: 600\n}\n\n.idd1 {\n    font-size: 12px\n}\n\n.number {\n    font-size: 22px;\n    font-weight: bold\n}\n\n.follow {\n    font-size: 12px;\n    font-weight: 500;\n    color: #444444\n}\n\n.btn1 {\n    height: 40px;\n    width: 150px;\n    border: none;\n    background-color: #000;\n    color: #aeaeae;\n    font-size: 15px\n}\n\n.text span {\n    font-size: 13px;\n    color: #545454;\n    font-weight: 500\n}\n\n.icons i {\n    font-size: 19px\n}\n\nhr .new1 {\n    border: 1px solid\n}\n\n.join {\n    font-size: 14px;\n    color: #a0a0a0;\n    font-weight: bold\n}\n\n.date {\n    background-color: #ccc\n}\n\n.collapse {\n    &:not(.show) {\n      display: none;\n    }\n  }\n  \n  .collapsing {\n    height: 0;\n    overflow: hidden;\n    @include transition($transition-collapse);\n  }\n\nvar{\n    $accordion-padding-y:                     1rem;\n$accordion-padding-x:                     1.25rem;\n$accordion-color:                         $body-color;\n$accordion-bg:                            $body-bg;\n$accordion-border-width:                  $border-width;\n$accordion-border-color:                  rgba($black, .125);\n$accordion-border-radius:                 $border-radius;\n$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);\n\n$accordion-body-padding-y:                $accordion-padding-y;\n$accordion-body-padding-x:                $accordion-padding-x;\n\n$accordion-button-padding-y:              $accordion-padding-y;\n$accordion-button-padding-x:              $accordion-padding-x;\n$accordion-button-color:                  $accordion-color;\n$accordion-button-bg:                     $accordion-bg;\n$accordion-transition:                    $btn-transition, border-radius .15s ease;\n$accordion-button-active-bg:              tint-color($component-active-bg, 90%);\n$accordion-button-active-color:           shade-color($primary, 10%);\n\n$accordion-button-focus-border-color:     $input-focus-border-color;\n$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;\n\n$accordion-icon-width:                    1.25rem;\n$accordion-icon-color:                    $accordion-color;\n$accordion-icon-active-color:             $accordion-button-active-color;\n$accordion-icon-transition:               transform .2s ease-in-out;\n$accordion-icon-transform:                rotate(-180deg);\n\n$accordion-button-icon:         url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n$accordion-button-active-icon:  url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>\");\n}\n\n\n.bg-modal {\n\tbackground-color: rgba(0, 0, 0, 0.7);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tz-index: 1;\n\ttop: 0;\n\tdisplay: none;\n\tjustify-content: center;\n\talign-items: center;\n}\n\n.modal-contents {\n\theight: 70%;\n\twidth: 60%;\n\tbackground-color: white;\n\ttext-align: center;\n\tpadding: 10px;\n\tposition: relative;\n\tz-index: 1;\n\n\n}\n\n.close {\n    position: absolute;\n    color: #444444;\n    top: 0px;\n    right: 14px;\n    font-size: 42px;\n    transform: rotate(45deg);\n    cursor: pointer;\n\n}}",
         "output": "str",
         "x": 610,
         "y": 280,
@@ -751,7 +726,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n      \n          <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n            <ul class=\"navbar-nav me-auto\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n              </li>\n            </ul>\n            <form class=\"d-flex\">\n              <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n              <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n            </form>\n          </div>\n        </div>\n      </nav>\n      <br><br>",
+        "template": "<!--nav-->\n<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-brand\" href=\"/home\">Cat Feeder</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\n      <ul class=\"navbar-nav me-auto\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/schedule\">Schedule</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/monitor\">Monitor</a>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"/catinfo\">Cat Information</a>\n        </li>\n      </ul>\n      <form class=\"d-flex\">\n        <input class=\"form-control me-sm-2\" type=\"text\" placeholder=\"Search\">\n        <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\n      </form>\n    </div>\n    <button type=\"button\" id=\"button\" class=\"btn btn-secondary\" style=\"margin-left: 8px;\">?</button>\n  </div>\n</nav>\n<br><br>\n\n<!--Pop up info-->\n<div id=\"simpleModal\" class=\"bg-modal\">\n<div class=\"modal-contents\">\n<div class=\"close\">+</div>\n\n<center><p><h3> วิธีการใช้งาน </h3></p></center>\n  <div style=\"text-align: center;  border: 3px; position: absolute;  top: 30%;\">\n  <p>ผู้ใช้สามารถเข้าถึงหน้าเว็บเพจได้ 6 เว็บเพจ ได้แก่ หน้าหลัก, หน้าดูตารางให้อาหารแมว, หน้าติดตามมอนิเตอร์ และหน้าข้อมูลของแมวสัตว์เลี้ยง เรายังมีหน้าย่อยซึ่งเป็นส่วนเสริมในการแก้ไขข้อมูลแมวสัตว์เลี้ยง ซึ่งจะเข้าถึงได้จากหน้าดูข้อมูลแมวเท่านั้น </p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขตารางการให้อาหาร เช่น การลบเวลาให้อาหาร การเพิ่มเวลาให้อาหารได้ในหน้าดูตารางให้อาหารแมว(/schedule)</p><br><br>\n  <p>ผู้ใช้สามารถ interact เพื่อแก้ไขข้อมูลของแมว เช่น น้ำหนัก ประเภท รวมทั้งคำนวนตารางอาหารได้ใหม่ ในหน้าแก้ไขข้อมูลของแมว(/catedit)</p><br><br>\n  </div>\n</div>\n</div>\n\n<!--pop up script-->\n<script>\ndocument.getElementById('button').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"flex\";});\n\ndocument.querySelector('.close').addEventListener(\"click\", function() {\ndocument.querySelector('.bg-modal').style.display = \"none\";});\n</script>",
         "output": "str",
         "x": 750,
         "y": 280,
@@ -760,23 +735,6 @@
                 "cab0a7efdcb776be"
             ]
         ]
-    },
-    {
-        "id": "32df637ec571be6b",
-        "type": "debug",
-        "z": "26945d84c9cd3d13",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 370,
-        "y": 920,
-        "wires": []
     },
     {
         "id": "e9f187cd64245c03",
@@ -791,9 +749,74 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
-        "y": 440,
+        "x": 1390,
+        "y": 540,
         "wires": []
+    },
+    {
+        "id": "2ce0f42f35c9ed1d",
+        "type": "switch",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "property": "payload.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "-1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 380,
+        "wires": [
+            [
+                "bcbfaee9ef830ef5",
+                "8d5fd373bc078603"
+            ],
+            [
+                "295c99da8891f455"
+            ]
+        ]
+    },
+    {
+        "id": "ac1578cd8a6b5c4b",
+        "type": "switch",
+        "z": "26945d84c9cd3d13",
+        "name": "",
+        "property": "payload.get.time",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "check",
+                "vt": "msg",
+                "case": true
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 650,
+        "y": 520,
+        "wires": [
+            [
+                "ad55df0f16e83828",
+                "b345dfacf3778c3a"
+            ],
+            [
+                "596e7dd140203d56"
+            ]
+        ]
     },
     {
         "id": "c9fd59362167d331",
